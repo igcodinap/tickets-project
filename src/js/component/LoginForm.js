@@ -61,7 +61,8 @@ export const LoginForm = () => {
 												</div>
 												<button
 													className="btn btn-lg btn-primary btn-block text-uppercase"
-													type="submit">
+													type="submit"
+													onClick={actions.changeUserStatus}>
 													Ingresar
 												</button>
 												<div className="text-center">o</div>

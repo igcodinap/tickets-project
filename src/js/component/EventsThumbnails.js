@@ -7,20 +7,31 @@ import { Context } from "../store/appContext";
 
 const EventsThumbnails = () => {
 
+    const { store, actions } = useContext(Context);
+
+
 
     return(
+
+
+
         <div className="col-2 mb-4">
         <Link to="/events-category/event" className="text-decoration-none">
-            <div className="card">
-                <img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
+            
+              {store.eventsDetails.map((item , index)=>{
+                  return(
+                    <div className="card">
+                      <img src={item.image} className="card-img-top" alt="..." />
                 <div className="card-body">
-                    <h5 className="card-title">Concierto de Primavera</h5>
+                    <h5 className="card-title">{item.event_title}</h5>
                 </div>
                 <div className="card-footer">
-                    <small className="text-muted">Musica</small>
+                    <small className="text-muted">{item.category}</small>
                     <FontAwesomeIcon icon={faPlusSquare} />
                 </div>
-            </div>
+                </div>
+                  ) ;
+              })}
         </Link>
     </div>
     )
