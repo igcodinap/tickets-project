@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { Context } from "../store/appContext";
+import Myfblogin from "./loginFB.js";
 
 export const LoginForm = () => {
 	const { store, actions } = useContext(Context);
@@ -78,6 +79,8 @@ export const LoginForm = () => {
 													className="btn btn-lg btn-facebook btn-block text-uppercase"
 													type="submit">
 													<i className="fab fa-facebook-f mr-2" /> Ingresar con Facebook
+													<br />
+													<Myfblogin />
 												</button>
 											</form>
 										</div>
