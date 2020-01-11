@@ -75,13 +75,7 @@ export const LoginForm = () => {
 													</button>
 												</Link>
 												<hr className="my-4" />
-												<button
-													className="btn btn-lg btn-facebook btn-block text-uppercase"
-													type="submit">
-													<i className="fab fa-facebook-f mr-2" /> Ingresar con Facebook
-													<br />
-													<Myfblogin />
-												</button>
+												<Myfblogin />
 											</form>
 										</div>
 									</div>

@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			filtros: [{ categoria: [], region: [], texto: "" }],
 			usuario: [
 				{
 					nombre: "Ivan Muñoz",
@@ -281,6 +282,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if ((baseUsuario.email == usuario) & (baseUsuario.password == pass)) {
 					setStore({ usuarioconectado: usuarioConectado });
 				}
+			},
+
+			addFilter: () => {
+				console.log("click!");
 			},
 
 			changeUserStatus: () => {
