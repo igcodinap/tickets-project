@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			filtros: [{ categoria: [], region: [], texto: "" }],
 			usuario: [
 				{
 					nombre: "Ivan Muñoz",
@@ -117,7 +118,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					street: "Marathon 5300, Macul, Región Metropolitana",
 					start_time: "2019-01-01",
 					end_time: "2019-01-02",
-					category: "Deportes"
+					category: "Deportes",
+					image: "https://via.placeholder.com/140x100"
 				},
 				{
 					eventid: "002",
@@ -130,7 +132,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					street: "Tupper 1941, Santiago",
 					start_time: "2019-12-04",
 					end_time: "2019-12-04",
-					category: "Musica"
+					category: "Musica",
+					image: "https://via.placeholder.com/140x100"
 				},
 				{
 					eventid: "003",
@@ -143,7 +146,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					street: "Tarapaca 1181, Santiago",
 					start_time: "2020-02-18",
 					end_time: "2020-02-18",
-					category: "Teatro y Cine"
+					category: "Teatro y Cine",
+					image: "https://via.placeholder.com/140x100"
 				},
 				{
 					eventid: "004",
@@ -156,7 +160,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					street: "Av. Capitán Antonio Millán 342, Rancagua",
 					start_time: "2019-12-13",
 					end_time: "2019-12-13",
-					category: "Cine y Teatro"
+					category: "Cine y Teatro",
+					image: "https://via.placeholder.com/140x100"
 				},
 				{
 					eventid: "005",
@@ -169,7 +174,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					street: "Av Libertador Bernardo O'Higgins 227, Santiago",
 					start_time: "2019-12-20",
 					end_time: "2019-12-20",
-					category: "Danza"
+					category: "Danza",
+					image: "https://via.placeholder.com/140x100"
 				},
 				{
 					eventid: "006",
@@ -182,7 +188,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					street: "Ernesto Pinto Lagarrigue 214, Recoleta",
 					start_time: "2019-12-07",
 					end_time: "2019-12-07",
-					category: "Infantil"
+					category: "Infantil",
+					image: "https://via.placeholder.com/140x100"
 				},
 				{
 					eventid: "007",
@@ -194,7 +201,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					street: "Agustinas, int, Ramon Nieto 170, Santiago",
 					start_time: "2019-12-15",
 					end_time: "2019-12-15",
-					category: "Otros"
+					category: "Otros",
+					image: "https://via.placeholder.com/140x100"
 				},
 				{
 					eventid: "008",
@@ -207,7 +215,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					street: "Marathon 5300, Macul, Región Metropolitana",
 					start_time: "2020-03-01",
 					end_time: "2020-03-02",
-					category: "Deportes"
+					category: "Deportes",
+					image: "https://via.placeholder.com/140x100"
 				},
 				{
 					eventid: "009",
@@ -220,7 +229,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					street: "Caupolicán 955, Concepción",
 					start_time: "2019-12-07",
 					end_time: "2019-12-07",
-					category: "Deportes"
+					category: "Deportes",
+					image: "https://via.placeholder.com/140x100"
 				},
 				{
 					eventid: "010",
@@ -233,7 +243,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					street: "Bernardo O'Higgins 1215, Valparaíso",
 					start_time: "2019-12-30",
 					end_time: "2019-12-30",
-					category: "Otros"
+					category: "Otros",
+					image: "https://via.placeholder.com/140x100"
 				}
 			]
 		},
@@ -271,6 +282,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if ((baseUsuario.email == usuario) & (baseUsuario.password == pass)) {
 					setStore({ usuarioconectado: usuarioConectado });
 				}
+			},
+
+			addFilter: () => {
+				console.log("click!");
 			},
 
 			changeUserStatus: () => {

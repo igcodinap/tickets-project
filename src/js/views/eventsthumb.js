@@ -99,176 +99,24 @@ export const EventsThumbnails = () => {
 					</div>
 				</div>
 				<div className="row col-10 float-right">
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Concierto de Primavera</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Musica</small>
-									<FontAwesomeIcon icon={faPlusSquare} />
-								</div>
+					{store.eventsDetails.map((item, index) => {
+						return (
+							<div className="col-2 mb-4" key={index}>
+								<Link to="/events-category/event" className="text-decoration-none">
+									<div className="card">
+										<img src={item.image} className="card-img-top" alt="..." />
+										<div className="card-body">
+											<h5 className="card-title">{item.event_title}</h5>
+										</div>
+										<div className="card-footer">
+											<small className="text-muted">{item.category}</small>
+											<FontAwesomeIcon icon={faPlusSquare} />
+										</div>
+									</div>
+								</Link>
 							</div>
-						</Link>
-					</div>
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Card title</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</Link>
-					</div>{" "}
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Card title</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</Link>
-					</div>{" "}
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Card title</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</Link>
-					</div>{" "}
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Card title</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</Link>
-					</div>{" "}
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Card title</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</Link>
-					</div>{" "}
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Card title</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</Link>
-					</div>{" "}
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Card title</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</Link>
-					</div>{" "}
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Card title</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</Link>
-					</div>{" "}
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Card title</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</Link>
-					</div>{" "}
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Card title</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</Link>
-					</div>{" "}
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Card title</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</Link>
-					</div>{" "}
-					<div className="col-2 mb-4">
-						<Link to="/events-category/event" className="text-decoration-none">
-							<div className="card">
-								<img src="https://via.placeholder.com/140x100" className="card-img-top" alt="..." />
-								<div className="card-body">
-									<h5 className="card-title">Card title</h5>
-								</div>
-								<div className="card-footer">
-									<small className="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</Link>
-					</div>
+						);
+					})}
 				</div>
 			</div>
 		</div>

@@ -62,7 +62,8 @@ export const LoginForm = () => {
 												</div>
 												<button
 													className="btn btn-lg btn-primary btn-block text-uppercase"
-													type="submit">
+													type="submit"
+													onClick={actions.changeUserStatus}>
 													Ingresar
 												</button>
 												<div className="text-center">o</div>
@@ -74,13 +75,7 @@ export const LoginForm = () => {
 													</button>
 												</Link>
 												<hr className="my-4" />
-												<button
-													className="btn btn-lg btn-facebook btn-block text-uppercase"
-													type="submit">
-													<i className="fab fa-facebook-f mr-2" /> Ingresar con Facebook
-													<br />
-													<Myfblogin />
-												</button>
+												<Myfblogin />
 											</form>
 										</div>
 									</div>
