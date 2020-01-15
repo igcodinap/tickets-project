@@ -26,7 +26,8 @@ export const Home = () => {
 									<Link
 										to="/events-category"
 										className="text-decoration-none"
-										onClick={actions.addFilter}>
+										value={item}
+										onClick={actions.addFilter(item)}>
 										<img src="" className="card-img-top" alt="" />
 
 										<div className="card-body">

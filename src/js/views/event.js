@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import eventMusicImg from "../../img/musica.jpg";
 import { Link } from "react-router-dom";
 import { Consumer } from "../store/appContext";
 import "../../styles/event.scss";
 import PropTypes from "prop-types";
+import { Context } from "../store/appContext";
 
 export const Event = () => {
+	const { store, actions } = useContext(Context);
+
+	const id = 13;
+
+	useEffect(() => {
+		fetch("https://pokeapi.co/api/v2/pokemon-form/" + id)
+			.then(response => response.json())
+			.then(data => console.log(data));
+	});
+
 	return (
 		<div className="container-fluid">
 			<div className="row">

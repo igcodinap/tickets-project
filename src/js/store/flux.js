@@ -23,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			usuarioconectado: false,
+			usuarioconectado: true,
 
 			userLogin: [{ email: "" }],
 			userPass: [{ pass: "" }],
@@ -246,7 +246,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					category: "Otros",
 					image: "https://via.placeholder.com/140x100"
 				}
-			]
+			],
+			pokemon: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -273,19 +274,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 
-			evaluaLogin: (usuario, pass) => {
-				const store = getStore();
-
-				const baseUsuario = store.usuario;
-				const usuarioConectado = true;
-
-				if ((baseUsuario.email == usuario) & (baseUsuario.password == pass)) {
-					setStore({ usuarioconectado: usuarioConectado });
-				}
-			},
-
-			addFilter: () => {
-				console.log("click!");
+			addFilter: valor => {
+				console.log(valor);
 			},
 
 			changeUserStatus: () => {
@@ -296,6 +286,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					setStore({ usuarioconectado: true });
 				}
+			},
+
+			guardaEventos: data => {
+				const store = getStore();
+
+				const pokemon = data;
+
+				setStore({ pokemon: pokemon });
 			},
 
 			getCurrentPosition: (options = {}) => {

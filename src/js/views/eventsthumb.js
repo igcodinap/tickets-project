@@ -8,6 +8,15 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export const EventsThumbnails = () => {
 	const { store, actions } = useContext(Context);
+	const [eventos, setEventos] = useState([]);
+	useEffect(() => {
+		fetch("http://e472aa03.ngrok.io/event")
+			.then(response => response.json())
+			.then(data => setEventos(data));
+	}, []);
+
+	console.log(eventos);
+	console.log(eventos[0]);
 
 	return (
 		<div>
@@ -57,7 +66,11 @@ export const EventsThumbnails = () => {
 									{store.region.map((item, index) => {
 										return (
 											<div className="form-check ml-2" key={index}>
-												<input className="form-check-input" type="checkbox" value="" />
+												<input
+													className="form-check-input"
+													type="checkbox"
+													value={item.nombre}
+												/>
 												<label className="form-check-label">{item.nombre}</label>
 											</div>
 										);
@@ -98,18 +111,23 @@ export const EventsThumbnails = () => {
 						</div>
 					</div>
 				</div>
+
 				<div className="row col-10 float-right">
-					{store.eventsDetails.map((item, index) => {
+					{eventos.map((item, index) => {
 						return (
 							<div className="col-2 mb-4" key={index}>
 								<Link to="/events-category/event" className="text-decoration-none">
 									<div className="card">
-										<img src={item.image} className="card-img-top" alt="..." />
+										<img
+											src="https://via.placeholder.com/140x100"
+											className="card-img-top"
+											alt="..."
+										/>
 										<div className="card-body">
-											<h5 className="card-title">{item.event_title}</h5>
+											<h5 className="card-title">{item.event_name}</h5>
 										</div>
 										<div className="card-footer">
-											<small className="text-muted">{item.category}</small>
+											<small className="text-muted">{item.event_category}</small>
 											<FontAwesomeIcon icon={faPlusSquare} />
 										</div>
 									</div>
