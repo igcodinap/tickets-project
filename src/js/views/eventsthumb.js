@@ -8,15 +8,6 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export const EventsThumbnails = () => {
 	const { store, actions } = useContext(Context);
-	const [eventos, setEventos] = useState([]);
-	useEffect(() => {
-		fetch("http://e472aa03.ngrok.io/event")
-			.then(response => response.json())
-			.then(data => setEventos(data));
-	}, []);
-
-	console.log(eventos);
-	console.log(eventos[0]);
 
 	return (
 		<div>
@@ -113,7 +104,7 @@ export const EventsThumbnails = () => {
 				</div>
 
 				<div className="row col-10 float-right">
-					{eventos.map((item, index) => {
+					{store.eventsDetails.map((item, index) => {
 						return (
 							<div className="col-2 mb-4" key={index}>
 								<Link to="/events-category/event" className="text-decoration-none">

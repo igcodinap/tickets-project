@@ -9,6 +9,14 @@ import loginButton from "../component/loginbutton.js";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
+	useEffect(() => {
+		fetch("http://e472aa03.ngrok.io/event")
+			.then(response => response.json())
+			.then(data => actions.guardaEventos(data));
+	}, []);
+
+	console.log(store.eventsDetails);
+
 	return (
 		<div>
 			<div className="container mb-3 d-flex justify-content-center">
@@ -23,11 +31,7 @@ export const Home = () => {
 						return (
 							<div className="col-4" key={index}>
 								<div className="card" style={{ width: 18 + "rem" }}>
-									<Link
-										to="/events-category"
-										className="text-decoration-none"
-										value={item}
-										onClick={actions.addFilter(item)}>
+									<Link to={"/events-category/" + item} className="text-decoration-none" value={item}>
 										<img src="" className="card-img-top" alt="" />
 
 										<div className="card-body">
