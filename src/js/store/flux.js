@@ -9,6 +9,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					password: "1234abc"
 				}
 			],
+			fbobject: {
+				isLoggedin: false,
+				first_name: "Anótame -",
+				email: "",
+				name: ""
+			},
 			geomap: {
 				locationState: "LOADING",
 				error: null,
@@ -313,6 +319,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let newgeomap = { locationState: "ERROR", error: e.message };
 					setStore({ geomap: newgeomap });
 				}
+			},
+
+			handleResponse: data => {
+				console.log(data);
+				setStore({
+					fbobject: {
+						isLoggedin: true,
+						first_name: data.profile.first_name,
+						email: data.profile.email,
+						name: data.profile.name
+					}
+				});
 			}
 		}
 	};
