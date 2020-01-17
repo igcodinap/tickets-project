@@ -27,7 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			usuarioconectado: true,
+			usuarioconectado: false,
 
 			userLogin: [{ email: "" }],
 			userPass: [{ pass: "" }],
