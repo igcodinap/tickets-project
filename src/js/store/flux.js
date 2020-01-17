@@ -17,7 +17,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				isLoggedin: false,
 				first_name: "Anótame -",
 				email: "",
-				name: ""
+                name: "",
+                pictureurl: ""
 			},
 			geomap: {
 				locationState: "LOADING",
@@ -205,7 +206,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						isLoggedin: true,
 						first_name: data.profile.first_name,
 						email: data.profile.email,
-						name: data.profile.name
+                        name: data.profile.name,
+                        pictureurl: data.profile.picture.data.url
 					}
 				});
 			}

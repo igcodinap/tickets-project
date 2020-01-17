@@ -26,6 +26,7 @@ export default class Myfblogin extends Component {
 									padding: "20px"
 								}}>
 								<div>
+                                    <img src={store.fbobject.pictureurl} />
 									<h2>Welcome: {store.fbobject.first_name}</h2>
 									Email: {store.fbobject.email}
 								</div>
