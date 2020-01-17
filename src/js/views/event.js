@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Consumer } from "../store/appContext";
 import "../../styles/event.scss";
 import PropTypes from "prop-types";
+import AppEvent from "../component/mapEvent.js";
 
 export const Event = () => {
 	return (
@@ -33,7 +34,9 @@ export const Event = () => {
 							<h2 className="card-title">NAME Event</h2>
 						</div>
 						<div className="jumbotron">
-							<h1 className="display-4 center">Here goes the EventMap</h1>
+							<h1 className="display-4 center">
+								<AppEvent />
+							</h1>
 						</div>
 
 						<ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
