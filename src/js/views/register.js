@@ -53,9 +53,9 @@ export const Register = () => {
 					{store.categoria.map((item, index) => {
 						return (
 							<div key={index}>
-								<input type="checkbox" className="form-check-input" id="exampleCheck1" />
+								<input type="checkbox" className="form-check-input" id={item.categoryid} />
 								<label className="form-check-label" htmlFor="exampleCheck1">
-									{item}
+									{item.categoryname}
 								</label>
 							</div>
 						);

@@ -22,14 +22,14 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			/**
-			 * EDIT THIS!
-			 * This function is the equivalent to "window.onLoad", it only run once on the entire application lifetime
-			 * you should do your ajax requests or fetch api requests here
-			 *
-			 * state.actions.loadSomeData(); <---- calling this function from the flux.js actions
-			 *
-			 **/
+			fetch("http://baaf8241.ngrok.io/event")
+				.then(response => response.json())
+				.then(data => state.actions.guardaEventos(data));
+
+			fetch("http://baaf8241.ngrok.io/categories")
+				.then(response => response.json())
+				.then(data => state.actions.guardaCategorias(data));
+
 			state.actions.loadLocation();
 		}, []);
 

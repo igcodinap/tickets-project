@@ -9,6 +9,28 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 export const EventsThumbnails = () => {
 	const { store, actions } = useContext(Context);
 
+	const [filtros, guardaFiltros] = useState({
+		categoria: [],
+		ciudad: "",
+		texto: ""
+	});
+
+	const obtenerFiltros = e => {
+		guardaFiltros({
+			...filtros,
+			[e.target.name]: e.target.value
+		});
+	};
+
+	const manejaFiltroCategoria = e => {};
+
+	console.log(filtros);
+	console.log(window.location.href);
+
+	const seleccionaEvento = e => {
+		actions.selectEvent(e.target.title);
+	};
+
 	return (
 		<div>
 			<div className="row justify-content-right">
@@ -19,11 +41,13 @@ export const EventsThumbnails = () => {
 						</span>
 					</div>
 					<input
+						name="texto"
 						type="text"
 						className="form-control"
 						placeholder="Te ayudo a encontrar tu destino..."
 						aria-label="Username"
 						aria-describedby="basic-addon1"
+						onChange={obtenerFiltros}
 					/>
 				</div>
 			</div>
@@ -57,7 +81,13 @@ export const EventsThumbnails = () => {
 									{store.region.map((item, index) => {
 										return (
 											<div className="form-check ml-2" key={index}>
-												<input className="form-check-input" type="checkbox" value="" />
+												<input
+													className="form-check-input"
+													type="checkbox"
+													value={item.nombre}
+													name="ciudad"
+													onChange={obtenerFiltros}
+												/>
 												<label className="form-check-label">{item.nombre}</label>
 											</div>
 										);
@@ -88,8 +118,14 @@ export const EventsThumbnails = () => {
 									{store.categoria.map((item, index) => {
 										return (
 											<div className="form-check ml-2" key={index}>
-												<input className="form-check-input" type="checkbox" value="" />
-												<label className="form-check-label">{item}</label>
+												<input
+													className="form-check-input"
+													type="checkbox"
+													value={item.categoryname}
+													onChange={obtenerFiltros}
+													name="categoria"
+												/>
+												<label className="form-check-label">{item.categoryname}</label>
 											</div>
 										);
 									})}
@@ -98,18 +134,31 @@ export const EventsThumbnails = () => {
 						</div>
 					</div>
 				</div>
+
 				<div className="row col-10 float-right">
 					{store.eventsDetails.map((item, index) => {
 						return (
-							<div className="col-2 mb-4" key={index}>
-								<Link to="/events-category/event" className="text-decoration-none">
+							<div className="col-2 mb-4" key={item.event_id}>
+								<Link
+									to="/events-category/event"
+									className="text-decoration-none"
+									onClick={seleccionaEvento}>
 									<div className="card">
-										<img src={item.image} className="card-img-top" alt="..." />
-										<div className="card-body">
-											<h5 className="card-title">{item.event_title}</h5>
+										<img
+											src="https://via.placeholder.com/140x100"
+											className="card-img-top"
+											alt="..."
+											title={item.event_id}
+										/>
+										<div className="card-body" value={item.event_id}>
+											<h5 className="card-title" title={item.event_id}>
+												{item.event_name}
+											</h5>
 										</div>
 										<div className="card-footer">
-											<small className="text-muted">{item.category}</small>
+											<small className="text-muted" title={item.event_id}>
+												{item.event_category}
+											</small>
 											<FontAwesomeIcon icon={faPlusSquare} />
 										</div>
 									</div>

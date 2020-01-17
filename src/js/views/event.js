@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useEffect, useContext, useState } from "react";
 import eventMusicImg from "../../img/musica.jpg";
 import { Link } from "react-router-dom";
 import { Consumer } from "../store/appContext";
 import "../../styles/event.scss";
 import PropTypes from "prop-types";
+<<<<<<< HEAD
 import AppEvent from "../component/mapEvent.js";
+=======
+import { Context } from "../store/appContext";
+import App from "../component/mapApp.js";
+>>>>>>> dev
 
 export const Event = () => {
+	const { store, actions } = useContext(Context);
+
+	const [evento, capturaEvento] = useState({});
+
+	useEffect(() => {
+		const datos = fetch("http://2b4eafef.ngrok.io/event/" + store.selectedEvent)
+			.then(response => response.json())
+			.then(data => capturaEvento(data));
+	}, []);
+
+	console.log(evento);
+
 	return (
 		<div className="container-fluid">
 			<div className="row">
@@ -31,11 +48,15 @@ export const Event = () => {
 				<div className="col-6">
 					<div className="card">
 						<div className="card-body">
-							<h2 className="card-title">NAME Event</h2>
+							<h2 className="card-title">{evento.event_name}</h2>
 						</div>
 						<div className="jumbotron">
 							<h1 className="display-4 center">
+<<<<<<< HEAD
 								<AppEvent />
+=======
+								<App />{" "}
+>>>>>>> dev
 							</h1>
 						</div>
 
@@ -83,21 +104,21 @@ export const Event = () => {
 								id="pills-home"
 								role="tabpanel"
 								aria-labelledby="pills-home-tab">
-								Muy fome la wea
+								{evento.description}
 							</div>
 							<div
 								className="tab-pane fade"
 								id="pills-profile"
 								role="tabpanel"
 								aria-labelledby="pills-profile-tab">
-								A la hora del..
+								{evento.start_time}
 							</div>
 							<div
 								className="tab-pane fade"
 								id="pills-contact"
 								role="tabpanel"
 								aria-labelledby="pills-contact-tab">
-								En boleterías, obvio
+								{evento.ticket_url}
 							</div>
 						</div>
 					</div>
