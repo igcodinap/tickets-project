@@ -4,12 +4,7 @@ import { Link } from "react-router-dom";
 import { Consumer } from "../store/appContext";
 import "../../styles/event.scss";
 import PropTypes from "prop-types";
-<<<<<<< HEAD
 import AppEvent from "../component/mapEvent.js";
-=======
-import { Context } from "../store/appContext";
-import App from "../component/mapApp.js";
->>>>>>> dev
 
 export const Event = () => {
 	const { store, actions } = useContext(Context);
@@ -52,11 +47,7 @@ export const Event = () => {
 						</div>
 						<div className="jumbotron">
 							<h1 className="display-4 center">
-<<<<<<< HEAD
 								<AppEvent />
-=======
-								<App />{" "}
->>>>>>> dev
 							</h1>
 						</div>
 
