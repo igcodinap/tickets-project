@@ -9,13 +9,8 @@ import loginButton from "../component/loginbutton.js";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
-	useEffect(() => {
-		fetch("http://e472aa03.ngrok.io/event")
-			.then(response => response.json())
-			.then(data => actions.guardaEventos(data));
-	}, []);
-
 	console.log(store.eventsDetails);
+	console.log(store.categorias);
 
 	return (
 		<div>
@@ -31,11 +26,14 @@ export const Home = () => {
 						return (
 							<div className="col-4" key={index}>
 								<div className="card" style={{ width: 18 + "rem" }}>
-									<Link to={"/events-category/" + item} className="text-decoration-none" value={item}>
+									<Link
+										to={"/events-category/" + item.categoryname}
+										className="text-decoration-none"
+										value={item.categoryname}>
 										<img src="" className="card-img-top" alt="" />
 
 										<div className="card-body">
-											<h5 className="card-title text-center">{item}</h5>
+											<h5 className="card-title text-center">{item.categoryname}</h5>
 										</div>
 									</Link>
 								</div>

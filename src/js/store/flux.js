@@ -1,9 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			filtrocategoria: [],
-			filtroregion: [],
-			filtrotexto: [],
+			filtros: {
+				filtrocategoria: [],
+				filtroregion: [],
+				filtrotexto: []
+			},
 			usuario: [
 				{
 					nombre: "Ivan Muñoz",
@@ -41,7 +43,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			categoria: ["Musica", "Deportes", "Teatro y Cine", "Otros", "Danza", "Infantil"],
+			categoria: [],
 			region: [
 				{
 					nombre: "Aisén del G. Carlos Ibáñez del Campo",
@@ -109,7 +111,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			eventsDetails: [],
-			pokemon: []
+			selectedEvent: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -156,6 +158,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const eventsDetails = data;
 
 				setStore({ eventsDetails: eventsDetails });
+			},
+			guardaCategorias: data => {
+				const categoria = data;
+
+				setStore({ categoria: categoria });
+			},
+			selectEvent: event => {
+				const selectedEvent = event;
+
+				setStore({ selectedEvent: selectedEvent });
+			},
+			selectEventDetails: event => {
+				const selectedEvent = event;
+
+				setStore({ selectedEvent: selectedEvent });
 			},
 
 			getCurrentPosition: (options = {}) => {

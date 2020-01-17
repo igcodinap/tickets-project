@@ -1,21 +1,24 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import eventMusicImg from "../../img/musica.jpg";
 import { Link } from "react-router-dom";
 import { Consumer } from "../store/appContext";
 import "../../styles/event.scss";
 import PropTypes from "prop-types";
 import { Context } from "../store/appContext";
+import App from "../component/mapApp.js";
 
 export const Event = () => {
 	const { store, actions } = useContext(Context);
 
-	const id = 13;
+	const [evento, capturaEvento] = useState({});
 
 	useEffect(() => {
-		fetch("https://pokeapi.co/api/v2/pokemon-form/" + id)
+		const datos = fetch("http://4bf655cd.ngrok.io/event/" + store.selectedEvent)
 			.then(response => response.json())
-			.then(data => console.log(data));
-	});
+			.then(data => capturaEvento(data));
+	}, []);
+
+	console.log(evento);
 
 	return (
 		<div className="container-fluid">
@@ -41,10 +44,12 @@ export const Event = () => {
 				<div className="col-6">
 					<div className="card">
 						<div className="card-body">
-							<h2 className="card-title">NAME Event</h2>
+							<h2 className="card-title">{evento.event_name}</h2>
 						</div>
 						<div className="jumbotron">
-							<h1 className="display-4 center">Here goes the EventMap</h1>
+							<h1 className="display-4 center">
+								<App />{" "}
+							</h1>
 						</div>
 
 						<ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -91,21 +96,21 @@ export const Event = () => {
 								id="pills-home"
 								role="tabpanel"
 								aria-labelledby="pills-home-tab">
-								Muy fome la wea
+								{evento.description}
 							</div>
 							<div
 								className="tab-pane fade"
 								id="pills-profile"
 								role="tabpanel"
 								aria-labelledby="pills-profile-tab">
-								A la hora del..
+								{evento.start_time}
 							</div>
 							<div
 								className="tab-pane fade"
 								id="pills-contact"
 								role="tabpanel"
 								aria-labelledby="pills-contact-tab">
-								En boleterías, obvio
+								{evento.ticket_url}
 							</div>
 						</div>
 					</div>
