@@ -7,7 +7,7 @@ import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
 function MapEvent() {
-	const [selectedEvent, setSelectedEvent] = useState(null);
+	const [selectEvent, setSelectedEvent] = useState(null);
 
 	useEffect(() => {
 		const listener = e => {
@@ -30,16 +30,16 @@ function MapEvent() {
 						<GoogleMap
 							defaultZoom={15}
 							defaultCenter={{
-								lat: Number(store.geomap.coords.latitude),
-								lng: Number(store.geomap.coords.longitude)
+								lat: Number(store.selectedEvent.lat),
+								lng: Number(store.selectedEvent.longi)
 							}}
 							defaultOptions={{ styles: mapStyles }}>
 							<Marker
 								position={{
-									lat: Number(store.geomap.coords.latitude),
-									lng: Number(store.geomap.coords.longitude)
+									lat: Number(store.selectedEvent.lat),
+									lng: Number(store.selectedEvent.longi)
 								}}
-								title={"AQUI ESTAS"}
+								title={store.selectedEvent.event_name}
 								icon={{
 									url: imgPin,
 									scaledSize: new google.maps.Size(50, 50),
@@ -47,22 +47,22 @@ function MapEvent() {
 									anchor: new google.maps.Point(5, 50)
 								}}
 								onClick={() => {
-									setSelectedEvent("Evento xxx");
+									setSelectedEvent(store.selectedEvent.event_name);
 								}}
 							/>
 
-							{selectedEvent && (
+							{selectEvent && (
 								<InfoWindow
 									onCloseClick={() => {
 										setSelectedEvent(null);
 									}}
 									position={{
-										lat: Number(store.geomap.coords.latitude),
-										lng: Number(store.geomap.coords.longitude)
+										lat: Number(store.selectedEvent.lat),
+										lng: Number(store.selectedEvent.longi)
 									}}>
 									<div>
-										<h2>{} Evento XXX </h2>
-										<p>Hora del Evento</p>
+										<h2>{store.selectedEvent.event_name} </h2>
+										<p>{store.selectedEvent.start_time}</p>
 									</div>
 								</InfoWindow>
 							)}

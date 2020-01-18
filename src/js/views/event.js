@@ -15,10 +15,13 @@ export const Event = () => {
 	useEffect(() => {
 		const datos = fetch("http://baaf8241.ngrok.io/event/" + store.selectedEvent)
 			.then(response => response.json())
-			.then(data => capturaEvento(data));
+			.then(data => actions.selectEventDetails(data));
 	}, []);
 
 	console.log(evento);
+
+	console.log(store.selectedEvent.lat);
+	console.log(store.selectedEvent.longi);
 
 	return (
 		<div className="container-fluid">
@@ -96,21 +99,21 @@ export const Event = () => {
 								id="pills-home"
 								role="tabpanel"
 								aria-labelledby="pills-home-tab">
-								{evento.description}
+								{store.eventsDetails.description}
 							</div>
 							<div
 								className="tab-pane fade"
 								id="pills-profile"
 								role="tabpanel"
 								aria-labelledby="pills-profile-tab">
-								{evento.start_time}
+								{store.eventsDetails.start_time}
 							</div>
 							<div
 								className="tab-pane fade"
 								id="pills-contact"
 								role="tabpanel"
 								aria-labelledby="pills-contact-tab">
-								{evento.ticket_url}
+								{store.eventsDetails.ticket_url}
 							</div>
 						</div>
 					</div>

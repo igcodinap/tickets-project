@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { LoginButton } from "./loginbutton";
 import { DiaryButton } from "./DiaryButton";
 import logo from "./../../img/logo.png";
+import { Context } from "../store/appContext.js";
 
 import "../../styles/modal.scss";
 
