@@ -9,6 +9,9 @@ import loginButton from "../component/loginbutton.js";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
+	console.log(store.eventsDetails);
+	console.log(store.categorias);
+
 	return (
 		<div>
 			<div className="container mb-3 d-flex justify-content-center">
@@ -24,13 +27,13 @@ export const Home = () => {
 							<div className="col-4" key={index}>
 								<div className="card" style={{ width: 18 + "rem" }}>
 									<Link
-										to="/events-category"
+										to={"/events-category/" + item.categoryname}
 										className="text-decoration-none"
-										onClick={actions.addFilter}>
+										value={item.categoryname}>
 										<img src="" className="card-img-top" alt="" />
 
 										<div className="card-body">
-											<h5 className="card-title text-center">{item}</h5>
+											<h5 className="card-title text-center">{item.categoryname}</h5>
 										</div>
 									</Link>
 								</div>
