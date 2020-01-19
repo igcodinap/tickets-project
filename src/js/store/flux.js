@@ -103,10 +103,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			eventsDetails: [],
 			selectedEvent: [],
-			selectedCalendar: [],
+			selectedCalendar: "",
 			selectedUserCalendars: []
 		},
 		actions: {
+			agregaEventoACalendario: e => {
+				const store = getStore();
+				e.preventDefault();
+				const selectedCalendar = selectedCalendar;
+				fetch(
+					`http://localhost:5000/calendar/${store.selectedCalendar.calendar_id}/event/${store.selectedEvent.event_id}`,
+					{
+						method: "PUT",
+						body: "",
+						headers: {
+							"Content-Type": ""
+						}
+					}
+				)
+					.then(response => response.json())
+					.then(data => console.log(data));
+			},
+
 			guardaCalendariosUsario: data => {
 				const selectedUserCalendars = data;
 
@@ -132,6 +150,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					setStore({ data_usuario_conectado: data_usuario });
 					setStore({ usuarioconectado: true });
+					setStore({ selectedCalendar: data_usuario[1].calendars[0] });
 				}
 			},
 
@@ -157,7 +176,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ selectedEvent: selectedEvent });
 
-				fetch("http://120755e9.ngrok.io/event/" + selectedEvent)
+				fetch("http://localhost:5000/event/" + selectedEvent)
 					.then(response => response.json())
 					.then(data => {
 						selectEventDetails(data);
@@ -193,7 +212,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					registration: () => {
 						const store = getStore();
-						fetch("http://120755e9.ngrok.io/signup", {
+						fetch("http://localhost:5000/signup", {
 							method: "POST",
 							body: JSON.stringify(store.user_data),
 							headers: { "Content-Type": "application/json" }

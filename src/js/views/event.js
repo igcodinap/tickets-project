@@ -19,13 +19,14 @@ export const Event = () => {
 	const [evento, capturaEvento] = useState({});
 
 	useEffect(() => {
-		const datos = fetch("http://120755e9.ngrok.io/event/" + store.selectedEvent)
+		const datos = fetch("http://localhost:5000/event/" + store.selectedEvent)
 			.then(response => response.json())
 			.then(data => {
 				capturaEvento(data);
 			});
 	}, []);
 
+<<<<<<< HEAD
 	console.log(evento);
 	console.log(store.selectedEvent);
 
@@ -36,18 +37,23 @@ export const Event = () => {
 	console.log(store.selectedEvent.lat);
 	console.log(store.selectedEvent.longi);
 
+=======
+>>>>>>> c75630fd0d55577484682be5c27e0e00339381d9
 	return (
 		<div className="container-fluid">
 			<div className="row">
 				<div className="col-6">
 					<div className="card bg-dark text-white">
-						<img src={img1} className="card-img" alt="..." />
+						<img src={evento.event_photo_url} className="card-img" alt="..." />
 						<div className="card-img-overlay d-flex flex-column justify-content-end">
 							<div className="container">
 								<div className="row justify-content-end">
 									<div className="col-9" />
 									<div className="col-3 align-self-end">
-										<button type="button" className="btn btn-warning">
+										<button
+											type="button"
+											className="btn btn-warning"
+											onClick={actions.agregaEventoACalendario}>
 											<i className="fa fa-calendar" aria-hidden="true" />
 											AddMyCalendar
 										</button>
@@ -112,7 +118,11 @@ export const Event = () => {
 								id="pills-home"
 								role="tabpanel"
 								aria-labelledby="pills-home-tab">
+<<<<<<< HEAD
 								{store.eventsDetails.description}
+=======
+								{store.selectedEvent.description}
+>>>>>>> c75630fd0d55577484682be5c27e0e00339381d9
 							</div>
 							<div
 								className="tab-pane fade"
@@ -126,7 +136,11 @@ export const Event = () => {
 								id="pills-contact"
 								role="tabpanel"
 								aria-labelledby="pills-contact-tab">
+<<<<<<< HEAD
 								{store.eventsDetails.ticket_url}
+=======
+								{store.selectedEvent.ticket_url}
+>>>>>>> c75630fd0d55577484682be5c27e0e00339381d9
 							</div>
 						</div>
 					</div>
