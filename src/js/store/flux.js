@@ -103,7 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			eventsDetails: [],
 			selectedEvent: [],
-			selectedCalendar: [],
+			selectedCalendar: "",
 			selectedUserCalendars: []
 		},
 		actions: {
@@ -112,7 +112,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				e.preventDefault();
 				const selectedCalendar = selectedCalendar;
 				fetch(
-					`http://localhost:5000/calendar/${store.selectedCalendar[0].calendar_id}/event/${store.selectedEvent.event_id}`
+					`http://localhost:5000/calendar/${store.selectedCalendar.calendar_id}/event/${store.selectedEvent.event_id}`,
+					{
+						method: "PUT",
+						body: "",
+						headers: {
+							"Content-Type": ""
+						}
+					}
 				)
 					.then(response => response.json())
 					.then(data => console.log(data));
@@ -143,7 +150,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					setStore({ data_usuario_conectado: data_usuario });
 					setStore({ usuarioconectado: true });
-					setStore({ selectedCalendar: data_usuario[1].calendars[0].calendar_id });
+					setStore({ selectedCalendar: data_usuario[1].calendars[0] });
 				}
 			},
 
