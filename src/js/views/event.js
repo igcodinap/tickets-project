@@ -109,7 +109,7 @@ export const Event = () => {
 								id="pills-home"
 								role="tabpanel"
 								aria-labelledby="pills-home-tab">
-								{evento.description}
+								{store.selectedEvent.description}
 							</div>
 							<div
 								className="tab-pane fade"
@@ -123,7 +123,7 @@ export const Event = () => {
 								id="pills-contact"
 								role="tabpanel"
 								aria-labelledby="pills-contact-tab">
-								{evento.ticket_url}
+								{store.selectedEvent.ticket_url}
 							</div>
 						</div>
 					</div>

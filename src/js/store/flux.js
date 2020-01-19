@@ -132,6 +132,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					setStore({ data_usuario_conectado: data_usuario });
 					setStore({ usuarioconectado: true });
+					setStore({ selectedCalendar: data_usuario[1].calendars[0].calendar_id });
 				}
 			},
 
