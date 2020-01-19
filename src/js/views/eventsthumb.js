@@ -5,6 +5,12 @@ import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusSquare } from "@fortawesome/free-regular-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import img1 from "../../img/1.jpg";
+import img2 from "../../img/2.jpg";
+import img3 from "../../img/3.jpg";
+import img4 from "../../img/4.jpg";
+import img5 from "../../img/5.jpg";
+import img6 from "../../img/6.jpg";
 
 export const EventsThumbnails = () => {
 	const { store, actions } = useContext(Context);
@@ -145,7 +151,7 @@ export const EventsThumbnails = () => {
 									onClick={seleccionaEvento}>
 									<div className="card">
 										<img
-											src="https://via.placeholder.com/140x100"
+											src={item.event_photo_url}
 											className="card-img-top"
 											alt="..."
 											title={item.event_id}

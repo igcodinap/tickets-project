@@ -5,14 +5,12 @@ import "../../styles/home.scss";
 export const Calendar = () => {
 	const { store, actions } = useContext(Context);
 
+	{
+		/*Selecciona uno de los calendarios para usar en el resto de la aplicacion*/
+	}
+
 	const [calendario, guardaCalendario] = useState({
 		calendar_id: store.data_usuario_conectado[1].calendars[0].calendar_id
-	});
-
-	const [datosNuevoCalendario, guardaDatosNuevoCalendario] = useState({
-		name_calendar: "",
-		description: "",
-		calendar_id_owner: store.data_usuario_conectado[1].user_id
 	});
 
 	const obtenerCalendario = e => {
@@ -20,6 +18,21 @@ export const Calendar = () => {
 			[e.target.title]: e.target.value
 		});
 	};
+
+	const actualizaStore = e => {
+		e.preventDefault();
+		actions.guardaCalendarioSeleccionado(calendario);
+	};
+
+	{
+		/*Crea un nuevo calendario*/
+	}
+
+	const [datosNuevoCalendario, guardaDatosNuevoCalendario] = useState({
+		name_calendar: "",
+		description: "",
+		calendar_id_owner: store.data_usuario_conectado[1].user_id
+	});
 
 	const obtenerDatosNuevoCalendario = e => {
 		guardaDatosNuevoCalendario({
@@ -48,6 +61,10 @@ export const Calendar = () => {
 			.then(data => actions.guardaCalendariosUsario(data.calendars));
 	};
 
+	{
+		/*Eliminar un calendario*/
+	}
+
 	return (
 		<div className="container">
 			{/*	<div className="list-group">
@@ -62,18 +79,21 @@ export const Calendar = () => {
 </div>*/}
 
 			<h3>SELECCIONAR CALENDARIO</h3>
-
-			<select onChange={obtenerCalendario} className="custom-select" title="calendar_id">
-				<option selected>Selecciona un calendario</option>
-				{store.selectedUserCalendars.map((item, index) => {
-					return (
-						<option value={item.calendar_id} key={index}>
-							{item.name_calendar}
-						</option>
-					);
-				})}
-			</select>
-
+			<div>
+				<select onChange={obtenerCalendario} className="custom-select" title="calendar_id">
+					<option selected>Selecciona un calendario</option>
+					{store.selectedUserCalendars.map((item, index) => {
+						return (
+							<option value={item.calendar_id} key={index}>
+								{item.name_calendar}
+							</option>
+						);
+					})}
+				</select>
+				<button type="button" className="btn btn-success" onClick={actualizaStore}>
+					Seleccionar Este Calendario
+				</button>
+			</div>
 			<br />
 			<br />
 			<br />

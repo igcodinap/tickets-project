@@ -25,7 +25,7 @@ export const LoginForm = () => {
 	const submitLogin = e => {
 		if (store.usuarioconectado === false) {
 			e.preventDefault();
-			fetch("http://120755e9.ngrok.io/login", {
+			fetch("http://localhost:5000/login", {
 				method: "POST",
 				body: JSON.stringify(datos),
 				headers: {
