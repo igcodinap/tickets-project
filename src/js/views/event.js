@@ -19,32 +19,28 @@ export const Event = () => {
 	const [evento, capturaEvento] = useState({});
 
 	useEffect(() => {
-		const datos = fetch("http://120755e9.ngrok.io/event/" + store.selectedEvent)
+		const datos = fetch("http://localhost:5000/event/" + store.selectedEvent)
 			.then(response => response.json())
 			.then(data => {
 				capturaEvento(data);
 			});
 	}, []);
 
-	console.log(evento);
-	console.log(store.selectedEvent);
-
-	console.log(`lat: ${store.selectedEvent.lat * 1}`);
-
-	console.log(store.categoria.indexOf({}));
-
 	return (
 		<div className="container-fluid">
 			<div className="row">
 				<div className="col-6">
 					<div className="card bg-dark text-white">
-						<img src={img1} className="card-img" alt="..." />
+						<img src={evento.event_photo_url} className="card-img" alt="..." />
 						<div className="card-img-overlay d-flex flex-column justify-content-end">
 							<div className="container">
 								<div className="row justify-content-end">
 									<div className="col-9" />
 									<div className="col-3 align-self-end">
-										<button type="button" className="btn btn-warning">
+										<button
+											type="button"
+											className="btn btn-warning"
+											onClick={actions.agregaEventoACalendario}>
 											<i className="fa fa-calendar" aria-hidden="true" />
 											AddMyCalendar
 										</button>
