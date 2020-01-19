@@ -21,13 +21,6 @@ export const LoginForm = () => {
 		console.log(datos);
 	};
 
-	const data = {
-		email: "ivan.munoz.r1@outlook.com",
-		password: "Enero2020",
-		name: "Alfonso",
-		last_name: "Romero",
-		birthday_date: "1987-09-02"
-	};
 	const crearUsuario = () => {
 		fetch("http://baaf8241.ngrok.io/signup", {
 			method: "POST",
@@ -58,7 +51,9 @@ export const LoginForm = () => {
 				}
 			})
 				.then(res => res.json())
-				.then(response => actions.changeUserStatus(response))
+				.then(response => {
+					actions.changeUserStatus(response);
+				})
 				.catch(error => console.error("Error:", error));
 		}
 	};
