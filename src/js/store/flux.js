@@ -17,14 +17,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				first_name: "Anótame -",
 				email: "",
 				name: "",
-				pictureurl: ""
+				pictureurl: "",
+				token: ""
 			},
 			geomap: {
 				locationState: "LOADING",
 				error: null,
 				coords: {
-					latitude: -33.448891,
-					longitude: -70.669266,
+					latitude: "",
+					longitude: "",
 					altitude: null,
 					accuracy: null,
 					altitudeAccuracy: null,
@@ -126,7 +127,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			changeUserStatus: data_usuario => {
 				const store = getStore();
-				if (store.usuarioconectado == true) {
+
+				if (store.fbobject.isLoggedin == true) {
+					setStore({
+						fbobject: {
+							isLoggedin: false,
+							first_name: "",
+							email: "",
+							name: "",
+							pictureurl: "",
+							token: ""
+						}
+					});
+				} else if (store.usuarioconectado == true) {
 					setStore({ usuarioconectado: false });
 					setStore({ data_usuario_conectado: {} });
 				} else {
@@ -157,7 +170,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ selectedEvent: selectedEvent });
 
-				fetch("http://120755e9.ngrok.io/event/" + selectedEvent)
+				fetch("http://5177612e.ngrok.io//event/" + selectedEvent)
 					.then(response => response.json())
 					.then(data => {
 						selectEventDetails(data);
@@ -189,7 +202,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						first_name: data.profile.first_name,
 						email: data.profile.email,
 						name: data.profile.name,
-						pictureurl: data.profile.picture.data.url
+						pictureurl: data.profile.picture.data.url,
+						token: data.tokenDetail.accessToken
 					},
 					registration: () => {
 						const store = getStore();
