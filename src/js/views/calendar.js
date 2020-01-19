@@ -19,9 +19,17 @@ export const Calendar = () => {
 		});
 	};
 
+	const [eventosCalendario, guardaEventosCalendario] = useState([]);
+
 	const actualizaStore = e => {
 		e.preventDefault();
 		actions.guardaCalendarioSeleccionado(calendario);
+		fetch(`http://localhost:5000/calendars/${calendario.calendar_id}`)
+			.then(response => response.json())
+			.then(data => {
+				guardaEventosCalendario(data);
+				console.log(data);
+			});
 	};
 
 	{
@@ -43,7 +51,7 @@ export const Calendar = () => {
 
 	const calendarCreation = e => {
 		e.preventDefault();
-		fetch("http://120755e9.ngrok.io/calendars", {
+		fetch("http://localhost:5000/calendars", {
 			method: "POST",
 			body: JSON.stringify(datosNuevoCalendario),
 			headers: { "Content-Type": "application/json" }
@@ -56,13 +64,17 @@ export const Calendar = () => {
 				}
 			})
 			.catch(err => console.log(err));
-		fetch(`http://120755e9.ngrok.io/user/${store.data_usuario_conectado[1].user_id}`)
+		fetch(`http://localhost:5000/user/${store.data_usuario_conectado[1].user_id}`)
 			.then(response => response.json())
 			.then(data => actions.guardaCalendariosUsario(data.calendars));
 	};
 
 	{
 		/*Eliminar un calendario*/
+	}
+
+	{
+		/*Llama el detalle de un calendario para renderizar eventos*/
 	}
 
 	return (
@@ -143,6 +155,9 @@ export const Calendar = () => {
 			<br />
 			<br />
 			<br />
+
+			<h3>RENDERIZAR EVENTOS GUARDADOS EN EL CALENDARIO</h3>
+
 			<div className="media">
 				<img src="https://picsum.photos/id/237/200/300" className="mr-3" alt="..." height="64px" width="64" />
 				<div className="media-body ">

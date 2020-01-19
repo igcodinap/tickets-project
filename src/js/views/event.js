@@ -26,19 +26,6 @@ export const Event = () => {
 			});
 	}, []);
 
-<<<<<<< HEAD
-	console.log(evento);
-	console.log(store.selectedEvent);
-
-	console.log(`lat: ${store.selectedEvent.lat * 1}`);
-
-	console.log(store.categoria.indexOf({}));
-
-	console.log(store.selectedEvent.lat);
-	console.log(store.selectedEvent.longi);
-
-=======
->>>>>>> c75630fd0d55577484682be5c27e0e00339381d9
 	return (
 		<div className="container-fluid">
 			<div className="row">
@@ -118,11 +105,7 @@ export const Event = () => {
 								id="pills-home"
 								role="tabpanel"
 								aria-labelledby="pills-home-tab">
-<<<<<<< HEAD
-								{store.eventsDetails.description}
-=======
 								{store.selectedEvent.description}
->>>>>>> c75630fd0d55577484682be5c27e0e00339381d9
 							</div>
 							<div
 								className="tab-pane fade"
@@ -136,11 +119,7 @@ export const Event = () => {
 								id="pills-contact"
 								role="tabpanel"
 								aria-labelledby="pills-contact-tab">
-<<<<<<< HEAD
-								{store.eventsDetails.ticket_url}
-=======
 								{store.selectedEvent.ticket_url}
->>>>>>> c75630fd0d55577484682be5c27e0e00339381d9
 							</div>
 						</div>
 					</div>
