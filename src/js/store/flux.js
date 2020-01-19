@@ -194,22 +194,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						name: data.profile.name,
 						pictureurl: data.profile.picture.data.url
 					},
-					submitLogin: e => {
-						e.preventDefault();
-						fetch("http://120755e9.ngrok.io/login", {
-							method: "POST",
-							body: JSON.stringify({
-								email: "ivan.munoz.r1@outlook.com",
-								password: "Enero2020"
-							}),
-							headers: {
-								"Content-Type": "application/json"
-							}
-						})
-							.then(res => res.json())
-							.then(response => actions.changeUserStatus(response))
-							.catch(error => console.error("Error:", error));
-					},
 					registration: () => {
 						const store = getStore();
 						fetch("http://120755e9.ngrok.io/signup", {

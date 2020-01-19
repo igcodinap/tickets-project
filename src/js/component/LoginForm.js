@@ -8,6 +8,19 @@ import Myfblogin from "./loginFB.js";
 export const LoginForm = () => {
 	const { store, actions } = useContext(Context);
 
+	const [datos, guardaDatos] = useState({
+		email: "",
+		password: ""
+	});
+
+	const obtenerDatos = e => {
+		guardaDatos({
+			...datos,
+			[e.target.type]: e.target.value
+		});
+		console.log(datos);
+	};
+
 	const data = {
 		email: "ivan.munoz.r1@outlook.com",
 		password: "Enero2020",
@@ -35,20 +48,19 @@ export const LoginForm = () => {
 	};
 
 	const submitLogin = e => {
-		e.preventDefault();
-		fetch("http://120755e9.ngrok.io/login", {
-			method: "POST",
-			body: JSON.stringify({
-				email: "ivan.munoz.r1@outlook.com",
-				password: "Enero2020"
-			}),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-			.then(res => res.json())
-			.then(response => actions.changeUserStatus(response))
-			.catch(error => console.error("Error:", error));
+		if (store.usuarioconectado === false) {
+			e.preventDefault();
+			fetch("http://120755e9.ngrok.io/login", {
+				method: "POST",
+				body: JSON.stringify(datos),
+				headers: {
+					"Content-Type": "application/json"
+				}
+			})
+				.then(res => res.json())
+				.then(response => actions.changeUserStatus(response))
+				.catch(error => console.error("Error:", error));
+		}
 	};
 
 	return (
@@ -61,6 +73,7 @@ export const LoginForm = () => {
 							<form className="form-signin">
 								<div className="form-label-group">
 									<input
+										onChange={obtenerDatos}
 										type="email"
 										id="inputEmail"
 										className="form-control"
@@ -73,6 +86,7 @@ export const LoginForm = () => {
 
 								<div className="form-label-group">
 									<input
+										onChange={obtenerDatos}
 										type="password"
 										id="inputPassword"
 										className="form-control"
