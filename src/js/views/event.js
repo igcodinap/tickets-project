@@ -21,13 +21,9 @@ export const Event = () => {
 	useEffect(() => {
 		const datos = fetch("http://120755e9.ngrok.io/event/" + store.selectedEvent)
 			.then(response => response.json())
-<<<<<<< HEAD
-			.then(data => actions.selectEventDetails(data));
-=======
 			.then(data => {
 				capturaEvento(data);
 			});
->>>>>>> 44e31dd77a0879fbc1e4e083ae46f0d3ffb2a96e
 	}, []);
 
 	console.log(evento);

@@ -1,50 +1,3 @@
-<<<<<<< HEAD
-import React, { useEffect, useContext, useState } from "react";
-import "../../styles/home.scss";
-
-export const Calendar = () => {
-	const data = {
-		email: "ivan.munoz.r1@outlook.com",
-		password: "Enero2020",
-		name: "Alfonso",
-		last_name: "Romero",
-		birthday_date: "1987-09-02"
-	};
-
-	const crearUsuario = () => {
-		fetch("http://baaf8241.ngrok.io/signup", {
-			method: "POST",
-			body: JSON.stringify({
-				email: "ivan.munoz.r1@outlook.com",
-				password: "Enero2020",
-				name: "Alfonso",
-				last_name: "Romero",
-				birthday_date: "1987-09-02"
-			}),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-			.then(res => res.json())
-			.then(response => console.log("Success:", JSON.stringify(response)))
-			.catch(error => console.error("Error:", error));
-	};
-
-	const login = () => {
-		fetch("http://baaf8241.ngrok.io/login", {
-			method: "POST",
-			body: JSON.stringify({
-				email: "ivan.munoz.r1@outlook.com",
-				password: "Enero2020"
-			}),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-			.then(res => res.json())
-			.then(response => console.log("Success:", JSON.stringify(response)))
-			.catch(error => console.error("Error:", error));
-=======
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
@@ -93,7 +46,6 @@ export const Calendar = () => {
 		fetch(`http://120755e9.ngrok.io/user/${store.data_usuario_conectado[1].user_id}`)
 			.then(response => response.json())
 			.then(data => actions.guardaCalendariosUsario(data.calendars));
->>>>>>> 44e31dd77a0879fbc1e4e083ae46f0d3ffb2a96e
 	};
 
 	return (
@@ -109,17 +61,6 @@ export const Calendar = () => {
 			</a>
 </div>*/}
 
-<<<<<<< HEAD
-			<div className="media">
-				<button type="button" className="btn btn-primary" onClick={crearUsuario}>
-					Crear Usuario
-				</button>
-
-				<button type="button" className="btn btn-danger" onClick={login}>
-					login
-				</button>
-
-=======
 			<h3>SELECCIONAR CALENDARIO</h3>
 
 			<select onChange={obtenerCalendario} className="custom-select" title="calendar_id">
@@ -183,7 +124,6 @@ export const Calendar = () => {
 			<br />
 			<br />
 			<div className="media">
->>>>>>> 44e31dd77a0879fbc1e4e083ae46f0d3ffb2a96e
 				<img src="https://picsum.photos/id/237/200/300" className="mr-3" alt="..." height="64px" width="64" />
 				<div className="media-body ">
 					<h5 className="mt-0">Mes</h5>

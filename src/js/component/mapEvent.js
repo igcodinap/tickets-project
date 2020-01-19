@@ -7,10 +7,7 @@ import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 function MapEvent() {
 	const [selectEvent, setSelectedEvent] = useState(null);
-<<<<<<< HEAD
 
-=======
->>>>>>> 44e31dd77a0879fbc1e4e083ae46f0d3ffb2a96e
 	useEffect(() => {
 		const listener = e => {
 			if (e.key === "Escape") {
@@ -50,10 +47,6 @@ function MapEvent() {
 									setSelectedEvent(store.selectedEvent.event_name);
 								}}
 							/>
-<<<<<<< HEAD
-
-=======
->>>>>>> 44e31dd77a0879fbc1e4e083ae46f0d3ffb2a96e
 							{selectEvent && (
 								<InfoWindow
 									onCloseClick={() => {
@@ -64,11 +57,7 @@ function MapEvent() {
 										lng: Number(store.selectedEvent.longi)
 									}}>
 									<div>
-<<<<<<< HEAD
-										<h2>{store.selectedEvent.event_name} </h2>
-=======
 										<h2>{store.selectedEvent.event_name} Evento XXX </h2>
->>>>>>> 44e31dd77a0879fbc1e4e083ae46f0d3ffb2a96e
 										<p>{store.selectedEvent.start_time}</p>
 									</div>
 								</InfoWindow>
