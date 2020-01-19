@@ -22,7 +22,7 @@ export const Register = () => {
 	};
 	console.log(registro);
 	const registration = () => {
-		fetch("http://120755e9.ngrok.io/signup", {
+		fetch("http://localhost:5000/signup", {
 			method: "POST",
 			body: JSON.stringify(registro),
 			headers: { "Content-Type": "application/json" }

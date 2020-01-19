@@ -19,11 +19,7 @@ export const Event = () => {
 	const [evento, capturaEvento] = useState({});
 
 	useEffect(() => {
-<<<<<<< HEAD
-		const datos = fetch("localhost:5000/event/" + store.selectedEvent)
-=======
-		const datos = fetch("http://120755e9.ngrok.io/event/" + store.selectedEvent)
->>>>>>> 44e31dd77a0879fbc1e4e083ae46f0d3ffb2a96e
+		const datos = fetch("http://localhost:5000/event/" + store.selectedEvent)
 			.then(response => response.json())
 			.then(data => {
 				capturaEvento(data);
@@ -42,7 +38,7 @@ export const Event = () => {
 			<div className="row">
 				<div className="col-6">
 					<div className="card bg-dark text-white">
-						<img src={img1} className="card-img" alt="..." />
+						<img src={evento.event_photo_url} className="card-img" alt="..." />
 						<div className="card-img-overlay d-flex flex-column justify-content-end">
 							<div className="container">
 								<div className="row justify-content-end">
