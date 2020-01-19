@@ -33,7 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			usuarioconectado: false,
-			data_usuario_conectado: {},
+			data_usuario_conectado: [],
 			categoria: [],
 			region: [
 				{
@@ -102,33 +102,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			eventsDetails: [],
-			selectedEvent: []
+			selectedEvent: [],
+			selectedCalendar: [],
+			selectedUserCalendars: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+			guardaCalendariosUsario: data => {
+				const selectedUserCalendars = data;
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+				setStore({ selectedUserCalendars: selectedUserCalendars });
 			},
 
+			guardaCalendarioSeleccionado: data => {
+				const selectedCalendar = data;
+
+				setStore({ selectedCalendar: selectedCalendar });
+			},
 			addFilterCategoria: valor => {
 				const filtrocategoria = valor;
 
@@ -156,15 +145,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ categoria: categoria });
 			},
+
 			selectEvent: event => {
 				const selectedEvent = event;
 
-				setStore({ selectedEvent: selectedEvent });
-			},
-			selectEventDetails: event => {
-				const selectedEvent = event;
+				const selectEventDetails = event => {
+					const selectedEvent = event;
+
+					setStore({ selectedEvent: selectedEvent });
+				};
 
 				setStore({ selectedEvent: selectedEvent });
+
+				fetch("http://120755e9.ngrok.io/event/" + selectedEvent)
+					.then(response => response.json())
+					.then(data => {
+						selectEventDetails(data);
+					});
 			},
 
 			getCurrentPosition: (options = {}) => {

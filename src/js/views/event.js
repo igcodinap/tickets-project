@@ -1,5 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
 import eventMusicImg from "../../img/musica.jpg";
+import img1 from "../../img/1.jpg";
+import img2 from "../../img/2.jpg";
+import img3 from "../../img/3.jpg";
+import img4 from "../../img/4.jpg";
+import img5 from "../../img/5.jpg";
+import img6 from "../../img/6.jpg";
 import { Link } from "react-router-dom";
 import { Consumer } from "../store/appContext";
 import "../../styles/event.scss";
@@ -15,17 +21,24 @@ export const Event = () => {
 	useEffect(() => {
 		const datos = fetch("http://120755e9.ngrok.io/event/" + store.selectedEvent)
 			.then(response => response.json())
-			.then(data => capturaEvento(data));
+			.then(data => {
+				capturaEvento(data);
+			});
 	}, []);
 
 	console.log(evento);
+	console.log(store.selectedEvent);
+
+	console.log(`lat: ${store.selectedEvent.lat * 1}`);
+
+	console.log(store.categoria.indexOf({}));
 
 	return (
 		<div className="container-fluid">
 			<div className="row">
 				<div className="col-6">
 					<div className="card bg-dark text-white">
-						<img src={eventMusicImg} className="card-img" alt="..." />
+						<img src={img1} className="card-img" alt="..." />
 						<div className="card-img-overlay d-flex flex-column justify-content-end">
 							<div className="container">
 								<div className="row justify-content-end">
@@ -44,7 +57,7 @@ export const Event = () => {
 				<div className="col-6">
 					<div className="card">
 						<div className="card-body">
-							<h2 className="card-title">{evento.event_name}</h2>
+							<h2 className="card-title">{store.selectedEvent.event_name}</h2>
 						</div>
 						<div className="jumbotron">
 							<h1 className="display-4 center">

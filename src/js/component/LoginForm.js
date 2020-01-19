@@ -18,27 +18,9 @@ export const LoginForm = () => {
 			...datos,
 			[e.target.type]: e.target.value
 		});
-		console.log(datos);
 	};
 
-	const crearUsuario = () => {
-		fetch("http://baaf8241.ngrok.io/signup", {
-			method: "POST",
-			body: JSON.stringify({
-				email: "ivan.munoz.r1@outlook.com",
-				password: "Enero2020",
-				name: "Alfonso",
-				last_name: "Romero",
-				birthday_date: "1987-09-02"
-			}),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-			.then(res => res.json())
-			.then(response => console.log("Success:", JSON.stringify(response)))
-			.catch(error => console.error("Error:", error));
-	};
+	console.log(datos);
 
 	const submitLogin = e => {
 		if (store.usuarioconectado === false) {
@@ -53,10 +35,14 @@ export const LoginForm = () => {
 				.then(res => res.json())
 				.then(response => {
 					actions.changeUserStatus(response);
+					actions.guardaCalendariosUsario(response[1].calendars);
 				})
 				.catch(error => console.error("Error:", error));
 		}
 	};
+
+	console.log(store.data_usuario_conectado);
+	console.log(store.selectedUserCalendars);
 
 	return (
 		<div className="container d-flex justify-content-center">
