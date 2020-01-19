@@ -1,0 +1,16 @@
+					submitLogin: e => {
+						e.preventDefault();
+						fetch("http://120755e9.ngrok.io/login", {
+							method: "POST",
+							body: JSON.stringify({
+								email: "ivan.munoz.r1@outlook.com",
+								password: "Enero2020"
+							}),
+							headers: {
+								"Content-Type": "application/json"
+							}
+						})
+							.then(res => res.json())
+							.then(response => actions.changeUserStatus(response))
+							.catch(error => console.error("Error:", error));
+					},

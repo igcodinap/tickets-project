@@ -8,6 +8,7 @@ import { Event } from "./views/event";
 import { EventsThumbnails } from "./views/eventsthumb";
 import { Register } from "./views/register";
 import { Profile } from "./views/profile";
+import { LoginForm } from "./component/LoginForm";
 
 import injectContext from "./store/appContext";
 
@@ -31,6 +32,7 @@ export const Layout = () => {
 						<Route path="/calendar" component={Calendar} />
 						<Route path="/register" component={Register} />
 						<Route path="/profile" component={Profile} />
+						<Route path="/login" component={LoginForm} />
 						<Route exact path="/" component={Home} />
 						<Route render={() => <h1>Not found!</h1>} />
 					</Switch>
