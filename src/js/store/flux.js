@@ -189,7 +189,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ selectedEvent: selectedEvent });
 
-				fetch("http://5177612e.ngrok.io//event/" + selectedEvent)
+				fetch("http://5177612e.ngrok.io/event/" + selectedEvent)
 					.then(response => response.json())
 					.then(data => {
 						selectEventDetails(data);
