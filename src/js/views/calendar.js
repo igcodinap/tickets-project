@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useContext, useState } from "react";
 import "../../styles/home.scss";
 
@@ -43,6 +44,56 @@ export const Calendar = () => {
 			.then(res => res.json())
 			.then(response => console.log("Success:", JSON.stringify(response)))
 			.catch(error => console.error("Error:", error));
+=======
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
+import "../../styles/home.scss";
+
+export const Calendar = () => {
+	const { store, actions } = useContext(Context);
+
+	const [calendario, guardaCalendario] = useState({
+		calendar_id: store.data_usuario_conectado[1].calendars[0].calendar_id
+	});
+
+	const [datosNuevoCalendario, guardaDatosNuevoCalendario] = useState({
+		name_calendar: "",
+		description: "",
+		calendar_id_owner: store.data_usuario_conectado[1].user_id
+	});
+
+	const obtenerCalendario = e => {
+		guardaCalendario({
+			[e.target.title]: e.target.value
+		});
+	};
+
+	const obtenerDatosNuevoCalendario = e => {
+		guardaDatosNuevoCalendario({
+			...datosNuevoCalendario,
+			[e.target.title]: e.target.value
+		});
+	};
+
+	const calendarCreation = e => {
+		e.preventDefault();
+		fetch("http://120755e9.ngrok.io/calendars", {
+			method: "POST",
+			body: JSON.stringify(datosNuevoCalendario),
+			headers: { "Content-Type": "application/json" }
+		})
+			.then(resp => resp.json())
+			.then(data => {
+				if (data.success) {
+					M.toast({ html: "User created succesully" });
+					history.push("/login");
+				}
+			})
+			.catch(err => console.log(err));
+		fetch(`http://120755e9.ngrok.io/user/${store.data_usuario_conectado[1].user_id}`)
+			.then(response => response.json())
+			.then(data => actions.guardaCalendariosUsario(data.calendars));
+>>>>>>> 44e31dd77a0879fbc1e4e083ae46f0d3ffb2a96e
 	};
 
 	return (
@@ -58,6 +109,7 @@ export const Calendar = () => {
 			</a>
 </div>*/}
 
+<<<<<<< HEAD
 			<div className="media">
 				<button type="button" className="btn btn-primary" onClick={crearUsuario}>
 					Crear Usuario
@@ -67,6 +119,71 @@ export const Calendar = () => {
 					login
 				</button>
 
+=======
+			<h3>SELECCIONAR CALENDARIO</h3>
+
+			<select onChange={obtenerCalendario} className="custom-select" title="calendar_id">
+				<option selected>Selecciona un calendario</option>
+				{store.selectedUserCalendars.map((item, index) => {
+					return (
+						<option value={item.calendar_id} key={index}>
+							{item.name_calendar}
+						</option>
+					);
+				})}
+			</select>
+
+			<br />
+			<br />
+			<br />
+			<h3>CREAR NUEVO CALENDARIO</h3>
+			<form>
+				<div className="form-row align-items-center">
+					<div className="col-auto">
+						<label className="sr-only" htmlFor="inlineFormInput">
+							Name
+						</label>
+						<input
+							onChange={obtenerDatosNuevoCalendario}
+							type="text"
+							className="form-control mb-2"
+							id="inlineFormInput"
+							placeholder="Name_Calendar"
+							title="name_calendar"
+						/>
+					</div>
+					<div className="col-auto">
+						<label className="sr-only" htmlFor="inlineFormInput">
+							Name
+						</label>
+						<input
+							onChange={obtenerDatosNuevoCalendario}
+							type="text"
+							className="form-control mb-2"
+							id="inlineFormInput"
+							placeholder="Description"
+							title="description"
+						/>
+					</div>
+					<div className="col-auto">
+						<button type="submit" className="btn btn-primary mb-2" onClick={calendarCreation}>
+							Submit
+						</button>
+					</div>
+				</div>
+			</form>
+
+			<br />
+			<br />
+			<br />
+
+			<h3>ELIMINAR CALENDARIO</h3>
+
+			<br />
+			<br />
+			<br />
+			<div className="media">
+>>>>>>> 44e31dd77a0879fbc1e4e083ae46f0d3ffb2a96e
 				<img src="https://picsum.photos/id/237/200/300" className="mr-3" alt="..." height="64px" width="64" />
 				<div className="media-body ">
 					<h5 className="mt-0">Mes</h5>

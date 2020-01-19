@@ -6,18 +6,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				filtroregion: [],
 				filtrotexto: []
 			},
-			usuario: [
-				{
-					nombre: "Ivan Muñoz",
-					email: "munoz.romero.ivan@gmail.com",
-					password: "1234abc"
-				}
-			],
+			user_data: {
+				firstname: "",
+				lastname: "",
+				email: "",
+				password: ""
+			},
 			fbobject: {
 				isLoggedin: false,
 				first_name: "Anótame -",
 				email: "",
-				name: ""
+				name: "",
+				pictureurl: ""
 			},
 			geomap: {
 				locationState: "LOADING",
@@ -32,23 +32,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					speed: null
 				}
 			},
-
 			usuarioconectado: false,
-
-			userLogin: [{ email: "" }],
-			userPass: [{ pass: "" }],
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
+			data_usuario_conectado: [],
 			categoria: [],
 			region: [
 				{
@@ -117,45 +102,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			eventsDetails: [],
-			selectedEvent: []
+			selectedEvent: [],
+			selectedCalendar: [],
+			selectedUserCalendars: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+			guardaCalendariosUsario: data => {
+				const selectedUserCalendars = data;
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+				setStore({ selectedUserCalendars: selectedUserCalendars });
 			},
 
+			guardaCalendarioSeleccionado: data => {
+				const selectedCalendar = data;
+
+				setStore({ selectedCalendar: selectedCalendar });
+			},
 			addFilterCategoria: valor => {
 				const filtrocategoria = valor;
 
 				setStore({ filtrocategoria: filtrocategoria });
 			},
 
-			changeUserStatus: () => {
+			changeUserStatus: data_usuario => {
 				const store = getStore();
-
 				if (store.usuarioconectado == true) {
 					setStore({ usuarioconectado: false });
+					setStore({ data_usuario_conectado: {} });
 				} else {
+					setStore({ data_usuario_conectado: data_usuario });
 					setStore({ usuarioconectado: true });
 				}
 			},
@@ -170,15 +145,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ categoria: categoria });
 			},
+
 			selectEvent: event => {
 				const selectedEvent = event;
 
-				setStore({ selectedEvent: selectedEvent });
-			},
-			selectEventDetails: event => {
-				const selectedEvent = event;
+				const selectEventDetails = event => {
+					const selectedEvent = event;
+
+					setStore({ selectedEvent: selectedEvent });
+				};
 
 				setStore({ selectedEvent: selectedEvent });
+
+				fetch("http://120755e9.ngrok.io/event/" + selectedEvent)
+					.then(response => response.json())
+					.then(data => {
+						selectEventDetails(data);
+					});
 			},
 
 			getCurrentPosition: (options = {}) => {
@@ -205,7 +188,56 @@ const getState = ({ getStore, getActions, setStore }) => {
 						isLoggedin: true,
 						first_name: data.profile.first_name,
 						email: data.profile.email,
-						name: data.profile.name
+						name: data.profile.name,
+						pictureurl: data.profile.picture.data.url
+					},
+					registration: () => {
+						const store = getStore();
+						fetch("http://120755e9.ngrok.io/signup", {
+							method: "POST",
+							body: JSON.stringify(store.user_data),
+							headers: { "Content-Type": "application/json" }
+						})
+							.then(resp => resp.json())
+							.then(data => {
+								if (data.success) {
+									M.toast({ html: "User created succesully" });
+									history.push("/login");
+								}
+							})
+							.catch(err => console.log(err));
+					},
+					handleChangeRegistration: e => {
+						const store = getStore();
+						let { user_data } = store;
+						user_data[e.target.id] = e.target.value;
+						setStore({ user_data: user_data });
+					},
+
+					submitRegistration: (e, history) => {
+						e.preventDefault();
+						const store = getStore();
+						let { user_data } = store;
+						let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+						let reEmail = /\S+@\S+\.\S+/;
+						if (
+							user_data.password === "" ||
+							user_data.firstname === "" ||
+							user_data.lastname === "" ||
+							user_data.email === ""
+						) {
+							M.toast({ html: "A form field is currently in blank" });
+						} else if (!re.test(user_data.password)) {
+							M.toast({
+								html:
+									"Password must contain at least 6 characters long, one uppercase letter and one number.",
+								displayLength: 6000
+							});
+						} else if (!reEmail.test(user_data.email)) {
+							M.toast({ html: "Invalid email input" });
+						} else {
+							getActions().registration();
+						}
 					}
 				});
 			}
