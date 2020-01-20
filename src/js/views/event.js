@@ -26,6 +26,9 @@ export const Event = () => {
 			});
 	}, []);
 
+
+
+	
 	return (
 		<div className="container-fluid">
 			<div className="row">
