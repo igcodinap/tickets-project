@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { withGoogleMap, withScriptjs, GoogleMap, Marker, InfoWindow } from "react-google-maps";
-import * as comunaData from "../../data/chile_with_regions.json";
+//import * as comunaData from "../../data/chile_with_regions.json";
 import mapStyles from "../../data/mapStyles.js";
 import { Context } from "../store/appContext.js";
 import imgPin from "../../img/logoPin.png";
 
 function Map() {
-	const [selectedComuna, setSelectedComuna] = useState(null);
+	const [selectedEvent, setSelectedEvent] = useState(null);
 
 	useEffect(() => {
 		const listener = e => {
 			if (e.key === "Escape") {
-				setSelectedComuna(null);
+				setSelectedEvent(null);
 			}
 		};
 		window.addEventListener("keydown", listener);
@@ -47,15 +47,15 @@ function Map() {
 								}}
 								onClick={() => {}}
 							/>
-							{comunaData.Metropolitana.map((comunaM, index) => (
+							{store.eventsDetails.map((geoevent, index) => (
 								<Marker
 									key={index}
 									position={{
-										lat: Number(comunaM.lat),
-										lng: Number(comunaM.lng)
+										lat: Number(geoevent.lat),
+										lng: Number(geoevent.longi)
 									}}
 									onClick={() => {
-										setSelectedComuna(comunaM);
+										setSelectedEvent(geoevent);
 									}}
 									/*icon={{
                 url: `/skateboarding.svg`,
@@ -63,18 +63,18 @@ function Map() {
             }} Para cambiar el icono del marcador*/
 								/>
 							))}
-							{selectedComuna && (
+							{selectedEvent && (
 								<InfoWindow
 									onCloseClick={() => {
-										setSelectedComuna(null);
+										setSelectedEvent(null);
 									}}
 									position={{
-										lat: Number(selectedComuna.lat),
-										lng: Number(selectedComuna.lng)
+										lat: Number(selectedEvent.lat),
+										lng: Number(selectedEvent.longi)
 									}}>
 									<div>
-										<h2>{selectedComuna.name}</h2>
-										<p>Hora del Evento</p>
+										<h2>{selectedEvent.event_name}</h2>
+										<p>{selectedEvent.start_time}</p>
 									</div>
 								</InfoWindow>
 							)}

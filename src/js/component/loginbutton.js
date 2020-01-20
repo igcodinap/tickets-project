@@ -7,7 +7,18 @@ import { Context } from "../store/appContext";
 export const LoginButton = () => {
 	const { store, actions } = useContext(Context);
 
-	if (store.usuarioconectado == true) {
+	if (store.fbobject.isLoggedin == true) {
+		return (
+			<>
+				<div className="btn-group ml-auto" role="group" aria-label="Basic example">
+					<button type="button" className="btn btn-danger" onClick={actions.changeUserStatus}>
+						Logout
+					</button>
+					<img src={store.fbobject.pictureurl} />
+				</div>
+			</>
+		);
+	} else if (store.usuarioconectado == true) {
 		return (
 			<>
 				<div className="btn-group ml-auto" role="group" aria-label="Basic example">

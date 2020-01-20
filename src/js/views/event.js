@@ -19,7 +19,7 @@ export const Event = () => {
 	const [evento, capturaEvento] = useState({});
 
 	useEffect(() => {
-		const datos = fetch("http://localhost:5000/event/" + store.selectedEvent)
+		const datos = fetch("http://5177612e.ngrok.io/event/" + store.selectedEvent)
 			.then(response => response.json())
 			.then(data => {
 				capturaEvento(data);
