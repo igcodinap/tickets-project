@@ -22,7 +22,7 @@ export const Register = () => {
 	};
 	console.log(registro);
 	const registration = () => {
-		fetch("http://localhost:5000/signup", {
+		fetch(`${store.url_prefix}/signup`, {
 			method: "POST",
 			body: JSON.stringify(registro),
 			headers: { "Content-Type": "application/json" }

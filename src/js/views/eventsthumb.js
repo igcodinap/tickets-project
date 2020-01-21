@@ -157,7 +157,11 @@ export const EventsThumbnails = () => {
 											title={item.event_id}
 										/>
 										<div className="card-body" value={item.event_id}>
-											<h5 className="card-title" title={item.event_id}>
+											<h5
+												className="card-title"
+												title={item.event_id}
+												data-lat="1"
+												data-longi="1">
 												{item.event_name}
 											</h5>
 										</div>
