@@ -9,8 +9,10 @@ import loginButton from "../component/loginbutton.js";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
-	console.log(store.eventsDetails);
-	console.log(store.categorias);
+	const capturaCategoria = e => {
+		addFilterCategoria(e.target.title);
+		console.log(e.target.title);
+	};
 
 	return (
 		<div>
@@ -29,11 +31,14 @@ export const Home = () => {
 									<Link
 										to={"/events-category/" + item.categoryname}
 										className="text-decoration-none"
-										value={item.categoryname}>
+										value={item.categoryname}
+										onClick={capturaCategoria}>
 										<img src="" className="card-img-top" alt="" />
 
-										<div className="card-body">
-											<h5 className="card-title text-center">{item.categoryname}</h5>
+										<div className="card-body" value={item.categoryname}>
+											<h5 className="card-title text-center" title={item.categoryname}>
+												{item.categoryname}
+											</h5>
 										</div>
 									</Link>
 								</div>

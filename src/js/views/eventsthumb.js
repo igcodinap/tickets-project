@@ -28,11 +28,6 @@ export const EventsThumbnails = () => {
 		});
 	};
 
-	const manejaFiltroCategoria = e => {};
-
-	console.log(filtros);
-	console.log(window.location.href);
-
 	const seleccionaEvento = e => {
 		actions.selectEvent(e.target.title);
 	};

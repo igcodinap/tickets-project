@@ -16,16 +16,6 @@ import { Context } from "../store/appContext";
 export const Event = () => {
 	const { store, actions } = useContext(Context);
 
-	const [evento, capturaEvento] = useState({});
-
-	useEffect(() => {
-		fetch(`${store.url_prefix}/event/${store.selectedEvent}`)
-			.then(response => response.json())
-			.then(data => {
-				capturaEvento(data);
-			});
-	}, []);
-
 	return (
 		<div className="container-fluid">
 			<div className="row">

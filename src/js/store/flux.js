@@ -2,11 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			url_prefix: "http://localhost:5000",
-			filtros: {
-				filtrocategoria: [],
-				filtroregion: [],
-				filtrotexto: []
-			},
+			filtrocategoria: [],
 			user_data: {
 				firstname: "",
 				lastname: "",
@@ -147,7 +143,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addFilterCategoria: valor => {
 				const filtrocategoria = valor;
 
-				setStore({ filtrocategoria: filtrocategoria });
+				setStore({ filtrocategoria: push.filtrocategoria });
 			},
 
 			changeUserStatus: data_usuario => {
