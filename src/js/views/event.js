@@ -19,7 +19,7 @@ export const Event = () => {
 	const [evento, capturaEvento] = useState({});
 
 	useEffect(() => {
-		const datos = fetch(`${store.url_prefix}/event/${store.selectedEvent}`)
+		fetch(`${store.url_prefix}/event/${store.selectedEvent}`)
 			.then(response => response.json())
 			.then(data => {
 				capturaEvento(data);
@@ -31,7 +31,7 @@ export const Event = () => {
 			<div className="row">
 				<div className="col-6">
 					<div className="card bg-dark text-white">
-						<img src={evento.event_photo_url} className="card-img" alt="..." />
+						<img src={store.selectedEvent.event_photo_url} className="card-img" alt="..." />
 						<div className="card-img-overlay d-flex flex-column justify-content-end">
 							<div className="container">
 								<div className="row justify-content-end">
