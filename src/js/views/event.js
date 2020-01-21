@@ -19,16 +19,13 @@ export const Event = () => {
 	const [evento, capturaEvento] = useState({});
 
 	useEffect(() => {
-		const datos = fetch("http://5177612e.ngrok.io/event/" + store.selectedEvent)
+		const datos = fetch(`${store.url_prefix}/event/${store.selectedEvent}`)
 			.then(response => response.json())
 			.then(data => {
 				capturaEvento(data);
 			});
 	}, []);
 
-
-
-	
 	return (
 		<div className="container-fluid">
 			<div className="row">
