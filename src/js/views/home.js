@@ -9,11 +9,6 @@ import loginButton from "../component/loginbutton.js";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
-	const capturaCategoria = e => {
-		addFilterCategoria(e.target.title);
-		console.log(e.target.title);
-	};
-
 	return (
 		<div>
 			<div className="container mb-3 d-flex justify-content-center">
@@ -31,8 +26,7 @@ export const Home = () => {
 									<Link
 										to={"/events-category/" + item.categoryname}
 										className="text-decoration-none"
-										value={item.categoryname}
-										onClick={capturaCategoria}>
+										value={item.categoryname}>
 										<img src="" className="card-img-top" alt="" />
 
 										<div className="card-body" value={item.categoryname}>

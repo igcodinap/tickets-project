@@ -143,7 +143,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addFilterCategoria: valor => {
 				const filtrocategoria = valor;
 
-				setStore({ filtrocategoria: push.filtrocategoria });
+				setStore({ filtrocategoria: filtrocategoria });
 			},
 
 			changeUserStatus: data_usuario => {
