@@ -14,7 +14,20 @@ export const LoginButton = () => {
 					<button type="button" className="btn btn-danger" onClick={actions.changeUserStatus}>
 						Logout
 					</button>
-					<img src={store.fbobject.pictureurl} />
+					<div className="media">
+						<img
+							src={store.fbobject.pictureurl}
+							className="align-self-center mr-3"
+							alt="..."
+							eight="50px"
+							width="50px"
+						/>
+						<div className="media-body">
+							<h6 className="mt-0">Bienvenid@</h6>
+							{store.fbobject.first_name}
+						</div>
+					</div>
+					<img />
 				</div>
 			</>
 		);

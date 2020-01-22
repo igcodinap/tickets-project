@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			url_prefix: "http://localhost:5000",
-			filtrocategoria: [],
+			eventos_filtrados: [],
 			user_data: {
 				firstname: "",
 				lastname: "",
@@ -140,10 +140,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ selectedCalendar: selectedCalendar });
 			},
-			addFilterCategoria: valor => {
-				const filtrocategoria = valor;
+			addFilterCategoria: cate => {
+				const store = getStore();
 
-				setStore({ filtrocategoria: filtrocategoria });
+				function filtraEventos(categoria) {
+					let eventosFiltrados = [];
+					for (var i = 0; i < store.eventsDetails.length; i++) {
+						if (categoria == store.eventsDetails[i].event_category) {
+							eventosFiltrados.push(store.eventsDetails[i]);
+						}
+					}
+					return eventosFiltrados;
+				}
+
+				setStore({ eventos_filtrados: filtraEventos(cate) });
 			},
 
 			changeUserStatus: data_usuario => {

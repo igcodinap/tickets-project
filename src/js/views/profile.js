@@ -21,7 +21,7 @@ export const Profile = () => {
 								readOnly
 								className="form-control-plaintext"
 								id="staticEmail"
-								value="Nombre de Usuario"
+								value={"Nombre de Usuario"}
 							/>
 						</div>
 					</div>

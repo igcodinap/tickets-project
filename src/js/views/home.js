@@ -7,7 +7,7 @@ import App from "../component/mapApp.js";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
-	const obtenerFiltros = e => {
+	const seleccionaCate = e => {
 		actions.addFilterCategoria(e.target.title);
 	};
 
@@ -26,7 +26,7 @@ export const Home = () => {
 										to="/events-category/"
 										className="text-decoration-none"
 										value={item.categoryname}
-										onClick={obtenerFiltros}>
+										onClick={seleccionaCate}>
 										<img src="" className="card-img-top" alt="" />
 
 										<div className="card-body" value={item.categoryname} title={item.categoryname}>

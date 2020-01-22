@@ -15,6 +15,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { CreateCalendar } from "./views/calendar_create";
 
 //create your first component
 export const Layout = () => {

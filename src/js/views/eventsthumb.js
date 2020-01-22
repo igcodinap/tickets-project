@@ -116,7 +116,7 @@ export const EventsThumbnails = () => {
 				</div>
 
 				<div className="row col-10 float-right">
-					{store.eventsDetails.map((item, index) => {
+					{store.eventos_filtrados.map((item, index) => {
 						return (
 							<div className="col-2 mb-4" key={item.event_id}>
 								<Link
