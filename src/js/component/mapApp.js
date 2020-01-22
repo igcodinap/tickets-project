@@ -27,7 +27,7 @@ function Map() {
 				{({ store, actions }) => {
 					return (
 						<GoogleMap
-							defaultZoom={15}
+							defaultZoom={11}
 							defaultCenter={{
 								lat: Number(store.geomap.coords.latitude),
 								lng: Number(store.geomap.coords.longitude)

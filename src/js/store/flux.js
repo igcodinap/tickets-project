@@ -21,8 +21,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				locationState: "LOADING",
 				error: null,
 				coords: {
-					latitude: "",
-					longitude: "",
+					latitude: "-33.4500000",
+					longitude: "-70.6666667",
 					altitude: null,
 					accuracy: null,
 					altitudeAccuracy: null,
@@ -100,7 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			eventsDetails: [],
-			selectedEvent: [],
+			selectedEvent: {},
 			selectedCalendar: "",
 			selectedUserCalendars: [],
 			selectedCalendarEvents: []
@@ -182,19 +182,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			selectEvent: event => {
-				const selectedEvent = event;
+				const store = getStore();
 
-				const selectEventDetails = event => {
+				console.log(store.eventsDetails);
+				console.log(event);
+
+				function ubicaEvento(evento) {
+					let nuevoArray = [];
+					for (var i = 0; i < store.eventsDetails.length; i++) {
+						if (evento == store.eventsDetails[i].event_id) {
+							nuevoArray.push(store.eventsDetails[i]);
+							console.log(i);
+						}
+					}
+					return nuevoArray;
+				}
+
+				setStore({ selectedEvent: ubicaEvento(event) });
+
+				/*const selectEventDetails = event => {
 					const selectedEvent = event;
 
-					setStore({ selectedEvent: selectedEvent });
-				};
+				setStore({ selectedEvent: selectedEvent });*/
 
-				fetch(`http://localhost:5000/event/${selectedEvent}`)
+				/*fetch(`http://localhost:5000/event/${selectedEvent}`)
 					.then(response => response.json())
 					.then(data => {
 						selectEventDetails(data);
-					});
+					});*/
 			},
 
 			getCurrentPosition: (options = {}) => {
@@ -224,8 +239,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						name: data.profile.name,
 						pictureurl: data.profile.picture.data.url,
 						token: data.tokenDetail.accessToken
-					},
-					
+					}
 				});
 			},
 			registration: () => {
@@ -266,8 +280,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					M.toast({ html: "A form field is currently in blank" });
 				} else if (!re.test(user_data.password)) {
 					M.toast({
-						html:
-							"Password must contain at least 6 characters long, one uppercase letter and one number.",
+						html: "Password must contain at least 6 characters long, one uppercase letter and one number.",
 						displayLength: 6000
 					});
 				} else if (!reEmail.test(user_data.email)) {
