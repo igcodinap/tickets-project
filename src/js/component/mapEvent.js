@@ -27,16 +27,16 @@ function MapEvent() {
 						<GoogleMap
 							defaultZoom={15}
 							defaultCenter={{
-								lat: Number(store.selectedEvent.lat),
-								lng: Number(store.selectedEvent.longi)
+								lat: Number(store.selectedEvent[0].lat),
+								lng: Number(store.selectedEvent[0].longi)
 							}}
 							defaultOptions={{ styles: mapStyles }}>
 							<Marker
 								position={{
-									lat: Number(store.selectedEvent.lat),
-									lng: Number(store.selectedEvent.longi)
+									lat: Number(store.selectedEvent[0].lat),
+									lng: Number(store.selectedEvent[0].longi)
 								}}
-								title={store.selectedEvent.event_name}
+								title={store.selectedEvent[0].event_name}
 								icon={{
 									url: imgPin,
 									scaledSize: new google.maps.Size(50, 50),
@@ -44,7 +44,7 @@ function MapEvent() {
 									anchor: new google.maps.Point(5, 50)
 								}}
 								onClick={() => {
-									setSelectedEvent(store.selectedEvent.event_name);
+									setSelectedEvent(store.selectedEvent[0].event_name);
 								}}
 							/>
 							{selectEvent && (
@@ -53,12 +53,12 @@ function MapEvent() {
 										setSelectedEvent(null);
 									}}
 									position={{
-										lat: Number(store.selectedEvent.lat),
-										lng: Number(store.selectedEvent.longi)
+										lat: Number(store.selectedEvent[0].lat),
+										lng: Number(store.selectedEvent[0].longi)
 									}}>
 									<div>
-										<h2>{store.selectedEvent.event_name} Evento XXX </h2>
-										<p>{store.selectedEvent.start_time}</p>
+										<h2>{store.selectedEvent[0].event_name} Evento XXX </h2>
+										<p>{store.selectedEvent[0].start_time}</p>
 									</div>
 								</InfoWindow>
 							)}

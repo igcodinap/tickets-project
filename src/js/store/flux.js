@@ -21,8 +21,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				locationState: "LOADING",
 				error: null,
 				coords: {
-					latitude: "",
-					longitude: "",
+					latitude: "-33.4500000",
+					longitude: "-70.6666667",
 					altitude: null,
 					accuracy: null,
 					altitudeAccuracy: null,
@@ -100,7 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			eventsDetails: [],
-			selectedEvent: [],
+			selectedEvent: {},
 			selectedCalendar: "",
 			selectedUserCalendars: [],
 			selectedCalendarEvents: []
@@ -182,19 +182,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			selectEvent: event => {
-				const selectedEvent = event;
+				const store = getStore();
 
-				const selectEventDetails = event => {
+				console.log(store.eventsDetails);
+				console.log(event);
+
+				function ubicaEvento(evento) {
+					let nuevoArray = [];
+					for (var i = 0; i < store.eventsDetails.length; i++) {
+						if (evento == store.eventsDetails[i].event_id) {
+							nuevoArray.push(store.eventsDetails[i]);
+							console.log(i);
+						}
+					}
+					return nuevoArray;
+				}
+
+				setStore({ selectedEvent: ubicaEvento(event) });
+
+				/*const selectEventDetails = event => {
 					const selectedEvent = event;
 
-					setStore({ selectedEvent: selectedEvent });
-				};
+				setStore({ selectedEvent: selectedEvent });*/
 
-				fetch(`http://localhost:5000/event/${selectedEvent}`)
+				/*fetch(`http://localhost:5000/event/${selectedEvent}`)
 					.then(response => response.json())
 					.then(data => {
 						selectEventDetails(data);
-					});
+					});*/
 			},
 
 			getCurrentPosition: (options = {}) => {
