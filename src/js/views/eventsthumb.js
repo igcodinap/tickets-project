@@ -15,11 +15,9 @@ import img6 from "../../img/6.jpg";
 export const EventsThumbnails = () => {
 	const { store, actions } = useContext(Context);
 
-	const [filtros, guardaFiltros] = useState({
-		categoria: [],
-		ciudad: "",
-		texto: ""
-	});
+	const [filtros, guardaFiltros] = useState();
+
+	const [eventos, filtraEventos] = useState(store.eventsDetails);
 
 	const obtenerFiltros = e => {
 		guardaFiltros({
@@ -34,25 +32,6 @@ export const EventsThumbnails = () => {
 
 	return (
 		<div>
-			<div className="row justify-content-right">
-				<div className="input-group mb-3 col-10 ">
-					<div className="input-group-prepend">
-						<span className="input-group-text" id="basic-addon1">
-							<FontAwesomeIcon icon={faSearch} />
-						</span>
-					</div>
-					<input
-						name="texto"
-						type="text"
-						className="form-control"
-						placeholder="Te ayudo a encontrar tu destino..."
-						aria-label="Username"
-						aria-describedby="basic-addon1"
-						onChange={obtenerFiltros}
-					/>
-				</div>
-			</div>
-
 			<div className="row">
 				<div className="col-2 bg-light">
 					<h2>Filtros</h2>
@@ -68,7 +47,7 @@ export const EventsThumbnails = () => {
 										data-target="#collapseOne"
 										aria-expanded="true"
 										aria-controls="collapseOne">
-										Region
+										Categorias
 									</button>
 								</h2>
 							</div>
@@ -79,17 +58,17 @@ export const EventsThumbnails = () => {
 								aria-labelledby="headingOne"
 								data-parent="#accordionExample">
 								<div className="card-body">
-									{store.region.map((item, index) => {
+									{store.categoria.map((item, index) => {
 										return (
 											<div className="form-check ml-2" key={index}>
 												<input
 													className="form-check-input"
 													type="checkbox"
-													value={item.nombre}
-													name="ciudad"
+													value={item.categoryname}
 													onChange={obtenerFiltros}
+													name="categoria"
 												/>
-												<label className="form-check-label">{item.nombre}</label>
+												<label className="form-check-label">{item.categoryname}</label>
 											</div>
 										);
 									})}
@@ -106,7 +85,7 @@ export const EventsThumbnails = () => {
 										data-target="#collapseTwo"
 										aria-expanded="false"
 										aria-controls="collapseTwo">
-										Categoria
+										Region
 									</button>
 								</h2>
 							</div>
@@ -116,17 +95,17 @@ export const EventsThumbnails = () => {
 								aria-labelledby="headingTwo"
 								data-parent="#accordionExample">
 								<div className="card-body">
-									{store.categoria.map((item, index) => {
+									{store.region.map((item, index) => {
 										return (
 											<div className="form-check ml-2" key={index}>
 												<input
 													className="form-check-input"
 													type="checkbox"
-													value={item.categoryname}
+													value={item.nombre}
+													name="ciudad"
 													onChange={obtenerFiltros}
-													name="categoria"
 												/>
-												<label className="form-check-label">{item.categoryname}</label>
+												<label className="form-check-label">{item.nombre}</label>
 											</div>
 										);
 									})}
@@ -164,7 +143,6 @@ export const EventsThumbnails = () => {
 											<small className="text-muted" title={item.event_id}>
 												{item.event_category}
 											</small>
-											<FontAwesomeIcon icon={faPlusSquare} />
 										</div>
 									</div>
 								</Link>

@@ -184,32 +184,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			selectEvent: event => {
 				const store = getStore();
 
-				console.log(store.eventsDetails);
-				console.log(event);
-
 				function ubicaEvento(evento) {
 					let nuevoArray = [];
 					for (var i = 0; i < store.eventsDetails.length; i++) {
 						if (evento == store.eventsDetails[i].event_id) {
 							nuevoArray.push(store.eventsDetails[i]);
-							console.log(i);
 						}
 					}
 					return nuevoArray;
 				}
 
 				setStore({ selectedEvent: ubicaEvento(event) });
-
-				/*const selectEventDetails = event => {
-					const selectedEvent = event;
-
-				setStore({ selectedEvent: selectedEvent });*/
-
-				/*fetch(`http://localhost:5000/event/${selectedEvent}`)
-					.then(response => response.json())
-					.then(data => {
-						selectEventDetails(data);
-					});*/
 			},
 
 			getCurrentPosition: (options = {}) => {

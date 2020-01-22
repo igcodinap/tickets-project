@@ -1,17 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
-import eventMusicImg from "../../img/musica.jpg";
-import img1 from "../../img/1.jpg";
-import img2 from "../../img/2.jpg";
-import img3 from "../../img/3.jpg";
-import img4 from "../../img/4.jpg";
-import img5 from "../../img/5.jpg";
-import img6 from "../../img/6.jpg";
-import { Link } from "react-router-dom";
-import { Consumer } from "../store/appContext";
 import "../../styles/event.scss";
-import PropTypes from "prop-types";
 import AppEvent from "../component/mapEvent.js";
 import { Context } from "../store/appContext";
+import { AddToCalendar } from "../component/AddToCalendarButton.js";
 
 export const Event = () => {
 	const { store, actions } = useContext(Context);
@@ -25,16 +16,7 @@ export const Event = () => {
 						<div className="card-img-overlay d-flex flex-column justify-content-end">
 							<div className="container">
 								<div className="row justify-content-end">
-									<div className="col-9" />
-									<div className="col-3 align-self-end">
-										<button
-											type="button"
-											className="btn btn-warning"
-											onClick={actions.agregaEventoACalendario}>
-											<i className="fa fa-calendar" aria-hidden="true" />
-											AddMyCalendar
-										</button>
-									</div>
+									<AddToCalendar />
 								</div>
 							</div>
 						</div>
