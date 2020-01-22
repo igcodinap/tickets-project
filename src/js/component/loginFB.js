@@ -24,17 +24,7 @@ export default class Myfblogin extends Component {
 									margin: "auto",
 									background: "#f4f4f4",
 									padding: "20px"
-<<<<<<< HEAD
-								}}>
-								<div>
-									<img src={store.fbobject.pictureurl} />
-									<h2>Welcome: {store.fbobject.first_name}</h2>
-									Email: {store.fbobject.email}
-								</div>
-							</div>
-=======
 								}}></div>
->>>>>>> dev
 						);
 					} else {
 						return (
