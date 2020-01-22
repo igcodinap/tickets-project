@@ -116,7 +116,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				e.preventDefault();
 				const selectedCalendar = selectedCalendar;
 				fetch(
-					`${store.url_prefix}/calendar/${store.selectedCalendar.calendar_id}/event/${store.selectedEvent.event_id}`,
+					`${store.url_prefix}/calendar/${store.selectedCalendar.calendar_id}/event/${store.selectedEvent[0].event_id}`,
 					{
 						method: "PUT",
 						body: "",
