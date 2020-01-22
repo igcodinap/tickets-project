@@ -14,12 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				first_name: "Anótame -",
 				email: "",
 				name: "",
-<<<<<<< HEAD
-				pictureurl: ""
-=======
 				pictureurl: "",
 				token: ""
->>>>>>> dev
 			},
 			geomap: {
 				locationState: "LOADING",
@@ -250,12 +246,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						first_name: data.profile.first_name,
 						email: data.profile.email,
 						name: data.profile.name,
-<<<<<<< HEAD
-						pictureurl: data.profile.picture.data.url
-=======
 						pictureurl: data.profile.picture.data.url,
 						token: data.tokenDetail.accessToken
->>>>>>> dev
 					}
 				});
 			},
