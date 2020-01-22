@@ -21,7 +21,7 @@ export const Profile = () => {
 								readOnly
 								className="form-control-plaintext"
 								id="staticEmail"
-								value="Nombre de Usuario"
+								value={"Nombre de Usuario"}
 							/>
 						</div>
 					</div>
@@ -66,7 +66,7 @@ export const Profile = () => {
 								<div key={index}>
 									<input type="checkbox" className="form-check-input" id="exampleCheck1" />
 									<label className="form-check-label" htmlFor="exampleCheck1">
-										{item}
+										{item.categoryname}
 									</label>
 								</div>
 							);

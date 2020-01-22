@@ -24,6 +24,7 @@ export default class Myfblogin extends Component {
 									margin: "auto",
 									background: "#f4f4f4",
 									padding: "20px"
+<<<<<<< HEAD
 								}}>
 								<div>
 									<img src={store.fbobject.pictureurl} />
@@ -31,6 +32,9 @@ export default class Myfblogin extends Component {
 									Email: {store.fbobject.email}
 								</div>
 							</div>
+=======
+								}}></div>
+>>>>>>> dev
 						);
 					} else {
 						return (
@@ -51,7 +55,7 @@ export default class Myfblogin extends Component {
 									</div>
 
 									<br />
-									<Status>{({ loading, status }) => <div> {status}</div>}</Status>
+									<Status>{({ loading, status }) => <div> </div>}</Status>
 								</LoginButton>
 							</FacebookProvider>
 						);

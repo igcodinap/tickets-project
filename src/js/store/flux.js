@@ -1,31 +1,32 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			filtros: {
-				filtrocategoria: [],
-				filtroregion: [],
-				filtrotexto: []
+			url_prefix: "http://localhost:5000",
+			eventos_filtrados: [],
+			user_data: {
+				firstname: "",
+				lastname: "",
+				email: "",
+				password: ""
 			},
-			usuario: [
-				{
-					nombre: "Ivan Muñoz",
-					email: "munoz.romero.ivan@gmail.com",
-					password: "1234abc"
-				}
-			],
 			fbobject: {
 				isLoggedin: false,
 				first_name: "Anótame -",
 				email: "",
 				name: "",
+<<<<<<< HEAD
 				pictureurl: ""
+=======
+				pictureurl: "",
+				token: ""
+>>>>>>> dev
 			},
 			geomap: {
 				locationState: "LOADING",
 				error: null,
 				coords: {
-					latitude: -33.448891,
-					longitude: -70.669266,
+					latitude: "-33.4500000",
+					longitude: "-70.6666667",
 					altitude: null,
 					accuracy: null,
 					altitudeAccuracy: null,
@@ -33,23 +34,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					speed: null
 				}
 			},
-
 			usuarioconectado: false,
-
-			userLogin: [{ email: "" }],
-			userPass: [{ pass: "" }],
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
+			data_usuario_conectado: [],
 			categoria: [],
 			region: [
 				{
@@ -118,46 +104,97 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			eventsDetails: [],
-			selectedEvent: []
+			selectedEvent: {},
+			selectedCalendar: "",
+			selectedUserCalendars: [],
+			selectedCalendarEvents: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			guardaEventosDeCalendarioSeleccionado: data => {
+				const selectedCalendarEvents = data;
+
+				setStore({ selectedCalendarEvents: selectedCalendarEvents });
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+			agregaEventoACalendario: e => {
+				const store = getStore();
+				e.preventDefault();
+				const selectedCalendar = selectedCalendar;
+				fetch(
+					`${store.url_prefix}/calendar/${store.selectedCalendar.calendar_id}/event/${store.selectedEvent[0].event_id}`,
+					{
+						method: "PUT",
+						body: "",
+						headers: {
+							"Content-Type": ""
+						}
+					}
+				)
+					.then(response => response.json())
+					.then(data => console.log(data));
 			},
-			changeColor: (index, color) => {
-				//get the store
+
+			guardaCalendariosUsario: data => {
+				const selectedUserCalendars = data;
+
+				setStore({ selectedUserCalendars: selectedUserCalendars });
+			},
+
+			guardaCalendarioSeleccionado: data => {
+				const selectedCalendar = data;
+
+				setStore({ selectedCalendar: selectedCalendar });
+			},
+			addFilterCategoria: cate => {
 				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+				if (cate === "todos") {
+					function todosLosEventos(string) {
+						let todosLosEvents = [];
+						for (var i = 0; i < store.eventsDetails.length; i++) {
+							if (string === "todos") {
+								todosLosEvents.push(store.eventsDetails[i]);
+							}
+						}
+						return todosLosEvents;
+					}
 
-				//reset the global store
-				setStore({ demo: demo });
-			},
-
-			addFilterCategoria: valor => {
-				const filtrocategoria = valor;
-
-				setStore({ filtrocategoria: filtrocategoria });
-			},
-
-			changeUserStatus: () => {
-				const store = getStore();
-
-				if (store.usuarioconectado == true) {
-					setStore({ usuarioconectado: false });
+					setStore({ eventos_filtrados: todosLosEventos(cate) });
 				} else {
+					function filtraEventos(categoria) {
+						let eventosFiltrados = [];
+						for (var i = 0; i < store.eventsDetails.length; i++) {
+							if (categoria == store.eventsDetails[i].event_category) {
+								eventosFiltrados.push(store.eventsDetails[i]);
+							}
+						}
+						return eventosFiltrados;
+					}
+
+					setStore({ eventos_filtrados: filtraEventos(cate) });
+				}
+			},
+
+			changeUserStatus: data_usuario => {
+				const store = getStore();
+
+				if (store.fbobject.isLoggedin == true) {
+					setStore({
+						fbobject: {
+							isLoggedin: false,
+							first_name: "",
+							email: "",
+							name: "",
+							pictureurl: "",
+							token: ""
+						}
+					});
+				} else if (store.usuarioconectado == true) {
+					setStore({ usuarioconectado: false });
+					setStore({ data_usuario_conectado: {} });
+				} else {
+					setStore({ data_usuario_conectado: data_usuario });
 					setStore({ usuarioconectado: true });
+					setStore({ selectedCalendar: data_usuario[1].calendars[0] });
 				}
 			},
 
@@ -171,15 +208,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ categoria: categoria });
 			},
+
 			selectEvent: event => {
-				const selectedEvent = event;
+				const store = getStore();
 
-				setStore({ selectedEvent: selectedEvent });
-			},
-			selectEventDetails: event => {
-				const selectedEvent = event;
+				function ubicaEvento(evento) {
+					let nuevoArray = [];
+					for (var i = 0; i < store.eventsDetails.length; i++) {
+						if (evento == store.eventsDetails[i].event_id) {
+							nuevoArray.push(store.eventsDetails[i]);
+						}
+					}
+					return nuevoArray;
+				}
 
-				setStore({ selectedEvent: selectedEvent });
+				setStore({ selectedEvent: ubicaEvento(event) });
 			},
 
 			getCurrentPosition: (options = {}) => {
@@ -207,9 +250,61 @@ const getState = ({ getStore, getActions, setStore }) => {
 						first_name: data.profile.first_name,
 						email: data.profile.email,
 						name: data.profile.name,
+<<<<<<< HEAD
 						pictureurl: data.profile.picture.data.url
+=======
+						pictureurl: data.profile.picture.data.url,
+						token: data.tokenDetail.accessToken
+>>>>>>> dev
 					}
 				});
+			},
+			registration: () => {
+				const store = getStore();
+				fetch(`${store.url_prefix}/signup`, {
+					method: "POST",
+					body: JSON.stringify(store.user_data),
+					headers: { "Content-Type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						if (data.success) {
+							M.toast({ html: "User created succesully" });
+							history.push("/login");
+						}
+					})
+					.catch(err => console.log(err));
+			},
+			handleChangeRegistration: e => {
+				const store = getStore();
+				let { user_data } = store;
+				user_data[e.target.id] = e.target.value;
+				setStore({ user_data: user_data });
+			},
+
+			submitRegistration: (e, history) => {
+				e.preventDefault();
+				const store = getStore();
+				let { user_data } = store;
+				let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+				let reEmail = /\S+@\S+\.\S+/;
+				if (
+					user_data.password === "" ||
+					user_data.firstname === "" ||
+					user_data.lastname === "" ||
+					user_data.email === ""
+				) {
+					M.toast({ html: "A form field is currently in blank" });
+				} else if (!re.test(user_data.password)) {
+					M.toast({
+						html: "Password must contain at least 6 characters long, one uppercase letter and one number.",
+						displayLength: 6000
+					});
+				} else if (!reEmail.test(user_data.email)) {
+					M.toast({ html: "Invalid email input" });
+				} else {
+					getActions().registration();
+				}
 			}
 		}
 	};

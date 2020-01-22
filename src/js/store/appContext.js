@@ -22,11 +22,11 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			fetch("http://baaf8241.ngrok.io/event")
+			fetch(`${state.store.url_prefix}/event`)
 				.then(response => response.json())
 				.then(data => state.actions.guardaEventos(data));
 
-			fetch("http://baaf8241.ngrok.io/categories")
+			fetch(`${state.store.url_prefix}/categories`)
 				.then(response => response.json())
 				.then(data => state.actions.guardaCategorias(data));
 

@@ -1,41 +1,22 @@
 import React, { useEffect, useContext, useState } from "react";
-import eventMusicImg from "../../img/musica.jpg";
-import { Link } from "react-router-dom";
-import { Consumer } from "../store/appContext";
 import "../../styles/event.scss";
-import PropTypes from "prop-types";
 import AppEvent from "../component/mapEvent.js";
 import { Context } from "../store/appContext";
+import { AddToCalendar } from "../component/AddToCalendarButton.js";
 
 export const Event = () => {
 	const { store, actions } = useContext(Context);
-
-	const [evento, capturaEvento] = useState({});
-
-	useEffect(() => {
-		const datos = fetch("http://baaf8241.ngrok.io/event/" + store.selectedEvent)
-			.then(response => response.json())
-			.then(data => capturaEvento(data));
-	}, []);
-
-	console.log(evento);
 
 	return (
 		<div className="container-fluid">
 			<div className="row">
 				<div className="col-6">
 					<div className="card bg-dark text-white">
-						<img src={eventMusicImg} className="card-img" alt="..." />
+						<img src={store.selectedEvent[0].event_photo_url} className="card-img" alt="..." />
 						<div className="card-img-overlay d-flex flex-column justify-content-end">
 							<div className="container">
 								<div className="row justify-content-end">
-									<div className="col-9" />
-									<div className="col-3 align-self-end">
-										<button type="button" className="btn btn-warning">
-											<i className="fa fa-calendar" aria-hidden="true" />
-											AddMyCalendar
-										</button>
-									</div>
+									<AddToCalendar />
 								</div>
 							</div>
 						</div>
@@ -44,7 +25,7 @@ export const Event = () => {
 				<div className="col-6">
 					<div className="card">
 						<div className="card-body">
-							<h2 className="card-title">{evento.event_name}</h2>
+							<h2 className="card-title">{store.selectedEvent[0].event_name}</h2>
 						</div>
 						<div className="jumbotron">
 							<h1 className="display-4 center">
@@ -96,21 +77,21 @@ export const Event = () => {
 								id="pills-home"
 								role="tabpanel"
 								aria-labelledby="pills-home-tab">
-								{evento.description}
+								{store.selectedEvent[0].description}
 							</div>
 							<div
 								className="tab-pane fade"
 								id="pills-profile"
 								role="tabpanel"
 								aria-labelledby="pills-profile-tab">
-								{evento.start_time}
+								{store.selectedEvent[0].start_time}
 							</div>
 							<div
 								className="tab-pane fade"
 								id="pills-contact"
 								role="tabpanel"
 								aria-labelledby="pills-contact-tab">
-								{evento.ticket_url}
+								{store.selectedEvent[0].ticket_url}
 							</div>
 						</div>
 					</div>

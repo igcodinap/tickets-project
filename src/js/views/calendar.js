@@ -1,74 +1,86 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
+import { CalendarEvents } from "./calendar_events.js";
+import { CreateCalendar } from "./calendar_create.js";
 import "../../styles/home.scss";
+import { Button, InputGroup, Label, Input, InputGroupAddon } from "reactstrap";
 
-export const Calendar = () => (
-	<div className="container">
-		{/*	<div className="list-group">
-			<a href="#" className="list-group-item list-group-item-action">
-				<div className="d-flex w-100 justify-content-between">
-					<h3 className="mb-1">Event Name</h3>
-					<h5>Date</h5>
-				</div>
-				<p className="mb-1">Event Description. OnHover changes its color</p>
-				<small>When clicked redirect to the event description view</small>
-			</a>
-</div>*/}
+export const Calendar = () => {
+	const { store, actions } = useContext(Context);
 
-		<div className="media">
-			<img src="https://picsum.photos/id/237/200/300" className="mr-3" alt="..." height="64px" width="64" />
-			<div className="media-body ">
-				<h5 className="mt-0">Mes</h5>
-				Posible resumen de la cantidad de eventos en el mes, o alguna descripcion graciosa del mes en
-				particular, como por ejemplo, Septiembre: Mes de la primavera, perfecto para admirar la naturaleza (no
-				aplica para Platanos Orientales)
-				<ul className="list-unstyled">
-					<li className="media">
-						<img
-							src="https://picsum.photos/id/237/200/300"
-							className="mr-3"
-							alt="imagen de la categoria del evento"
-							height="64px"
-							width="64"
-						/>
-						<div className="media-body">
-							<h5 className="mt-0 mb-1">List-based media object</h5>
-							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-							Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc
-							ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-						</div>
-					</li>
-					<li className="media my-4">
-						<img
-							src="https://picsum.photos/id/237/200/300"
-							className="mr-3"
-							alt="imagen de la categoria del evento"
-							height="64px"
-							width="64"
-						/>
-						<div className="media-body">
-							<h5 className="mt-0 mb-1">List-based media object</h5>
-							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-							Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc
-							ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-						</div>
-					</li>
-					<li className="media">
-						<img
-							src="https://picsum.photos/id/237/200/300"
-							className="mr-3"
-							alt="imagen de la categoria del evento"
-							height="64px"
-							width="64"
-						/>
-						<div className="media-body">
-							<h5 className="mt-0 mb-1">List-based media object</h5>
-							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
-							Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc
-							ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-						</div>
-					</li>
-				</ul>
-			</div>
+	{
+		/*Selecciona uno de los calendarios para usar en el resto de la aplicacion*/
+	}
+
+	const [calendario, guardaCalendario] = useState({
+		calendar_id: store.data_usuario_conectado[1].calendars[0].calendar_id
+	});
+
+	const [eventosCalendario, guardaEventosCalendario] = useState([]);
+
+	const obtenerCalendario = e => {
+		guardaCalendario({
+			[e.target.title]: e.target.value
+		});
+		fetch(`${store.url_prefix}/calendars/${calendario.calendar_id}`)
+			.then(response => response.json())
+			.then(data => {
+				guardaEventosCalendario(data);
+				console.log(data);
+				actions.guardaEventosDeCalendarioSeleccionado(data);
+			});
+	};
+
+	console.log(eventosCalendario);
+
+	const actualizaStore = e => {
+		actions.guardaCalendarioSeleccionado(calendario);
+		fetch(`${store.url_prefix}/calendars/${calendario.calendar_id}`)
+			.then(response => response.json())
+			.then(data => {
+				guardaEventosCalendario(data);
+				console.log(data);
+				actions.guardaEventosDeCalendarioSeleccionado(data);
+			});
+	};
+
+	const actualiza = () => {
+		setActualizacion(actualizacion == 0 ? 1 : 0);
+	};
+
+	return (
+		<div className="container">
+			<h3>SELECCIONAR CALENDARIO</h3>
+
+			<InputGroup>
+				<Input type="select" name="select" id="exampleSelect" title="calendar_id" onChange={obtenerCalendario}>
+					<option>Selecciona un Calendario</option>
+					{store.selectedUserCalendars.map((item, index) => {
+						return (
+							<option title="calendar_id" value={item.calendar_id} key={index}>
+								{item.name_calendar}
+							</option>
+						);
+					})}
+				</Input>
+				<InputGroupAddon addonType="append">
+					<Link to={"/calendarevents"} className="text-decoration-none">
+						<Button onClick={actualizaStore} color="primary">
+							Seleccionar
+						</Button>
+					</Link>
+				</InputGroupAddon>
+			</InputGroup>
+
+			<br />
+			<br />
+			<br />
+
+			<CreateCalendar />
+			<br />
+			<br />
+			<br />
 		</div>
-	</div>
-);
+	);
+};

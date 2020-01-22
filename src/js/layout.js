@@ -8,11 +8,14 @@ import { Event } from "./views/event";
 import { EventsThumbnails } from "./views/eventsthumb";
 import { Register } from "./views/register";
 import { Profile } from "./views/profile";
+import { LoginForm } from "./component/LoginForm";
+import { CalendarEvents } from "./views/calendar_events";
 
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { CreateCalendar } from "./views/calendar_create";
 
 //create your first component
 export const Layout = () => {
@@ -31,6 +34,8 @@ export const Layout = () => {
 						<Route path="/calendar" component={Calendar} />
 						<Route path="/register" component={Register} />
 						<Route path="/profile" component={Profile} />
+						<Route path="/login" component={LoginForm} />
+						<Route path="/calendarevents" component={CalendarEvents} />
 						<Route exact path="/" component={Home} />
 						<Route render={() => <h1>Not found!</h1>} />
 					</Switch>
