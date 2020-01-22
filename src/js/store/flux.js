@@ -143,17 +143,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 			addFilterCategoria: cate => {
 				const store = getStore();
 
-				function filtraEventos(categoria) {
-					let eventosFiltrados = [];
-					for (var i = 0; i < store.eventsDetails.length; i++) {
-						if (categoria == store.eventsDetails[i].event_category) {
-							eventosFiltrados.push(store.eventsDetails[i]);
+				if (cate === "todos") {
+					function todosLosEventos(string) {
+						let todosLosEvents = [];
+						for (var i = 0; i < store.eventsDetails.length; i++) {
+							if (string === "todos") {
+								todosLosEvents.push(store.eventsDetails[i]);
+							}
 						}
+						return todosLosEvents;
 					}
-					return eventosFiltrados;
-				}
 
-				setStore({ eventos_filtrados: filtraEventos(cate) });
+					setStore({ eventos_filtrados: todosLosEventos(cate) });
+				} else {
+					function filtraEventos(categoria) {
+						let eventosFiltrados = [];
+						for (var i = 0; i < store.eventsDetails.length; i++) {
+							if (categoria == store.eventsDetails[i].event_category) {
+								eventosFiltrados.push(store.eventsDetails[i]);
+							}
+						}
+						return eventosFiltrados;
+					}
+
+					setStore({ eventos_filtrados: filtraEventos(cate) });
+				}
 			},
 
 			changeUserStatus: data_usuario => {

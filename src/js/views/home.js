@@ -3,12 +3,14 @@ import "../../styles/home.scss";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import App from "../component/mapApp.js";
+import { Button } from "reactstrap";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	const seleccionaCate = e => {
 		actions.addFilterCategoria(e.target.title);
+		console.log(e.target.title);
 	};
 
 	return (
@@ -41,6 +43,11 @@ export const Home = () => {
 					})}
 				</div>
 			</div>
+			<Link to="/events-category/" className="text-decoration-none" title="todos" onClick={seleccionaCate}>
+				<button type="button" className="btn btn-primary btn-lg btn-block mt-3" title="todos">
+					Mostrar Todos los Eventos
+				</button>
+			</Link>
 		</div>
 	);
 };
