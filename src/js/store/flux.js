@@ -224,8 +224,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						name: data.profile.name,
 						pictureurl: data.profile.picture.data.url,
 						token: data.tokenDetail.accessToken
-					},
-					
+					}
 				});
 			},
 			registration: () => {
@@ -266,8 +265,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					M.toast({ html: "A form field is currently in blank" });
 				} else if (!re.test(user_data.password)) {
 					M.toast({
-						html:
-							"Password must contain at least 6 characters long, one uppercase letter and one number.",
+						html: "Password must contain at least 6 characters long, one uppercase letter and one number.",
 						displayLength: 6000
 					});
 				} else if (!reEmail.test(user_data.email)) {
